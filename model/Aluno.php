@@ -1,6 +1,6 @@
 <?php
 
-class Aluno extends Pessoa {
+final class Aluno extends Pessoa {
 
     private $rm;
     private $modulo;
@@ -36,7 +36,7 @@ class Aluno extends Pessoa {
     }
     
     public function setModulo() {
-        $this->modulo = '3';
+        $this->modulo = 5;
     }
     
     public function setPeriodo() {

@@ -4,8 +4,8 @@ class AlunoDAO {
     
     public function create(Aluno $aluno) {
 
-        echo '<pre>' . var_dump($aluno) . '</pre>';
-        echo $aluno->getNome();
+        //echo '<pre>' , var_dump($aluno) , '</pre>';
+        //echo $aluno->getNome();
 
         try {
             $sql = 'INSERT INTO aluno (rm, cpf, email, senha, nome, sobrenome, modulo, periodo, situacao_matricula)
@@ -13,15 +13,15 @@ class AlunoDAO {
 
             $statement = Conexao::getConexao()->prepare($sql);
 
-            $statement->bindValue(':rm', $aluno->getRm());
-            $statement->bindValue(':cpf', $aluno->getCpf());
-            $statement->bindValue(':email', $aluno->getEmail());
-            $statement->bindValue(':senha', $aluno->getSenha());
-            $statement->bindValue(':nome', $aluno->getNome());
-            $statement->bindValue(':sobrenome', $aluno->getSobrenome());
-            $statement->bindValue(':modulo', $aluno->getModulo());
-            $statement->bindValue(':periodo', $aluno->getPeriodo());
-            $statement->bindValue(':situacaoMatricula', $aluno->getSituacaoMatricula());
+            $statement->bindValue(':rm', $aluno->getRm(), PDO::PARAM_INT);
+            $statement->bindValue(':cpf', $aluno->getCpf(), PDO::PARAM_STR);
+            $statement->bindValue(':email', $aluno->getEmail(), PDO::PARAM_STR);
+            $statement->bindValue(':senha', $aluno->getSenha(), PDO::PARAM_STR);
+            $statement->bindValue(':nome', $aluno->getNome(), PDO::PARAM_STR);
+            $statement->bindValue(':sobrenome', $aluno->getSobrenome(), PDO::PARAM_STR);
+            $statement->bindValue(':modulo', $aluno->getModulo(), PDO::PARAM_INT);
+            $statement->bindValue(':periodo', $aluno->getPeriodo(), PDO::PARAM_STR);
+            $statement->bindValue(':situacaoMatricula', $aluno->getSituacaoMatricula(), PDO::PARAM_STR);
             
             return $statement->execute();
         } catch (Exception $e) {
@@ -29,7 +29,7 @@ class AlunoDAO {
         }
 
     }
-
+    
 }
 
 ?>

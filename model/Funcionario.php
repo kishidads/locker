@@ -1,11 +1,12 @@
 <?php
 
-class Funcionario {
+final class Funcionario extends Pessoa {
 
     private $funcao;
     private $privilegio;
 
-    public function __construct($funcao, $privilegio) {
+    public function __construct($cpf, $email, $senha, $nome, $sobrenome, $funcao, $privilegio) {
+        parent::__construct($cpf, $email, $senha, $nome, $sobrenome);
         $this->funcao = $funcao;
         $this->privilegio = $privilegio;
     }

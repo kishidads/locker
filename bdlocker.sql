@@ -48,7 +48,7 @@ create table aluno (
     senha varchar(20) not null,
     nome varchar(20) not null,
     sobrenome varchar(50) not null,
-    modulo varchar(10) not null,
+    modulo int(1) not null,
     periodo varchar(10) not null,
     situacao_matricula varchar(10) not null
 
