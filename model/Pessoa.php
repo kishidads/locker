@@ -8,13 +8,15 @@ abstract class Pessoa {
     private $senha;
     private $nome;
     private $sobrenome;
+    private $telefone;
 
-    protected function __construct($cpf, $email, $senha, $nome, $sobrenome) {
+    protected function __construct($cpf, $email, $senha, $nome, $sobrenome, $telefone) {
         $this->cpf = $cpf;
         $this->email = $email;
         $this->senha = $senha;
         $this->nome = $nome;
         $this->sobrenome = $sobrenome;
+        $this->telefone = $telefone;
     }
 
     public function getId() {
@@ -41,6 +43,10 @@ abstract class Pessoa {
         return $this->sobrenome;
     }
 
+    public function getTelefone() {
+        return $this->telefone;
+    }
+
     public function setId($id) {
         $this->id = $id;
     }
@@ -63,6 +69,10 @@ abstract class Pessoa {
 
     public function setSobrenome($sobrenome) {
         $this->sobrenome = $sobrenome;
+    }
+
+    public function setTelefone($telefone) {
+        $this->telefone = $telefone;
     }
 
 }

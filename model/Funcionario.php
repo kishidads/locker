@@ -5,8 +5,8 @@ final class Funcionario extends Pessoa {
     private $funcao;
     private $privilegio;
 
-    public function __construct($cpf, $email, $senha, $nome, $sobrenome, $funcao, $privilegio) {
-        parent::__construct($cpf, $email, $senha, $nome, $sobrenome);
+    public function __construct($cpf, $email, $senha, $nome, $sobrenome, $telefone, $funcao, $privilegio) {
+        parent::__construct($cpf, $email, $senha, $nome, $sobrenome, $telefone);
         $this->funcao = $funcao;
         $this->privilegio = $privilegio;
     }

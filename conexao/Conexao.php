@@ -16,4 +16,20 @@ class Conexao {
 
 }
 
+/*
+
+$dsn = 'mysql:dbname=bdarmariov3;host=localhost';
+$username = 'root';
+$password = '';
+
+try {
+    $pdo = new PDO($dsn, $username, $password);
+} catch (PDOException $e) {
+    echo 'Erro: ' . $e->getMessage();
+} catch (Exception $e) {
+    echo 'Erro genérico: ' . $e->getMessage();
+}
+
+*/
+
 ?>

@@ -6,11 +6,15 @@ include_once '../dao/AlunoDAO.php';
 
 // Retirando espaços no início e final de uma string
 
-/* function trimValue(&$value) {
+/*
+
+function trimValue(&$value) {
     $value = trim($value); 
 }
 
-array_walk($_POST, 'trimValue'); */
+array_walk($_POST, 'trimValue');
+
+*/
 
 $data = array_map('trim', $_POST);
 
@@ -22,6 +26,7 @@ $filters = array(
     'senha' => FILTER_UNSAFE_RAW,  
     'nome' => FILTER_UNSAFE_RAW,
     'sobrenome' => FILTER_UNSAFE_RAW,
+    'telefone' => FILTER_UNSAFE_RAW,
     'rm' => FILTER_SANITIZE_NUMBER_INT
 );
 
@@ -31,7 +36,7 @@ echo '<pre>' , var_dump($data) , '</pre>';
 
 if(isset($_POST['cadastrar'])){
     
-    $aluno = new Aluno(($data['cpf']), $data['email'], $data['senha'], $data['nome'], $data['sobrenome'], $data['rm']);
+    $aluno = new Aluno(($data['cpf']), $data['email'], $data['senha'], $data['nome'], $data['sobrenome'], $data['telefone'], $data['rm']);
     
     /*
     $aluno->setCpf($d['cpf']);

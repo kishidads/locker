@@ -1,121 +1,127 @@
---drop database if exists bdlocker;
+--DROP DATABASE IF EXISTS bdlocker;
 
-create database if not exists bdlocker;
+CREATE DATABASE IF NOT EXISTS bdlocker;
 
-use bdlocker;
+USE bdlocker;
 
-create table armario (
+CREATE TABLE armario (
 
-    id int not null auto_increment primary key,
-    secao varchar(3) not null,
-    numero int not null,
-    proximidade varchar(20),
-    andar varchar(5),
-    situacao varchar(12) not null,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    secao VARCHAR(3) NOT NULL,
+    numero INT NOT NULL,
+    proximidade VARCHAR(20),
+    andar VARCHAR(5),
+    situacao VARCHAR(12) NOT NULL,
 
-    constraint uk_secao_numero unique (secao, numero)
-
-);
-
-create table curso (
-
-    id int not null auto_increment primary key,
-    codigo_curso varchar(2) not null,
-    nome varchar(50) not null,
-    duracao int not null
+    CONSTRAINT uk_secao_numero UNIQUE (secao, numero)
 
 );
 
-create table funcionario (
+CREATE TABLE curso (
 
-    id int not null auto_increment primary key,
-    cpf varchar(11) not null unique,
-    email varchar(100) not null unique,
-    senha varchar(20) not null,
-    nome varchar(20) not null,
-    sobrenome varchar(50) not null,
-    funcao varchar(30) not null,
-    privilegio varchar(30) not null
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    codigo_curso VARCHAR(2) NOT NULL,
+    nome VARCHAR(50) NOT NULL,
+    duracao INT NOT NULL
 
 );
 
-create table aluno (
+CREATE TABLE funcionario (
 
-    id int not null auto_increment primary key,
-    rm int null unique,
-    cpf varchar(11) not null unique,
-    email varchar(100) not null unique,
-    senha varchar(20) not null,
-    nome varchar(20) not null,
-    sobrenome varchar(50) not null,
-    modulo int(1) not null,
-    periodo varchar(10) not null,
-    situacao_matricula varchar(10) not null
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    cpf VARCHAR(11) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(20) NOT NULL,
+    nome VARCHAR(20) NOT NULL,
+    sobrenome VARCHAR(50) NOT NULL,
+    funcao VARCHAR(30) NOT NULL,
+    privilegio VARCHAR(30) NOT NULL
 
 );
 
-create table aluno_curso (
+CREATE TABLE aluno (
 
-    id_aluno int not null,
-    id_curso int not null,
-
-    constraint pk_id_aluno_id_curso primary key (id_aluno, id_curso),
-
-    constraint fk_aluno_curso_aluno foreign key (id_aluno) references aluno(id),
-    constraint fk_aluno_curso_curso foreign key (id_curso) references curso(id)
-
-);
-
-create table telefone_funcionario (
-
-    id int not null auto_increment primary key,
-    telefone varchar(11) not null,
-    id_funcionario int not null,
-
-    constraint fk_telefone_funcionario_funcionario foreign key (id_funcionario) references funcionario(id)
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    rm INT NULL UNIQUE,
+    cpf CHAR(11) NOT NULL UNIQUE,
+    email VARCHAR(60) NOT NULL UNIQUE,
+    senha VARCHAR(45) NOT NULL,
+    nome VARCHAR(45) NOT NULL,
+    sobrenome VARCHAR(45) NOT NULL
 
 );
 
-create table telefone_aluno (
+CREATE TABLE aluno_curso (
 
-    id int not null auto_increment primary key,
-    telefone varchar(11) not null,
-    id_aluno int not null,
+    id_aluno INT NOT NULL,
+    id_curso INT NOT NULL,
+    modulo INT(1) NOT NULL,
+    periodo VARCHAR(10),
+    situacao_matricula TINYINT(1),
 
-    constraint fk_telefone_aluno_aluno foreign key (id_aluno) references aluno(id)
+    CONSTRAINT pk_id_aluno_id_curso PRIMARY KEY (id_aluno, id_curso),
 
-);
-
-create table plano (
-    id int not null auto_increment primary key
-);
-
-create table locacao (
-
-    id int not null auto_increment primary key,
-    plano varchar(9) not null,
-    data_locacao date not null,
-    id_aluno int not null,
-    id_armario int not null,
-    id_plano int not null,
-
-    constraint fk_locacao_aluno foreign key (id_aluno) references aluno(id),
-    constraint fk_locacao_armario foreign key (id_armario) references armario(id),
-    constraint fk_locacao_plano foreign key (id_plano) references plano(id)
+    CONSTRAINT fk_aluno_curso_aluno FOREIGN KEY (id_aluno) REFERENCES aluno(id),
+    CONSTRAINT fk_aluno_curso_curso FOREIGN KEY (id_curso) REFERENCES curso(id)
 
 );
 
-create table compartilhamento (
+CREATE TABLE telefone_funcionario (
 
-    id int not null auto_increment primary key,
-    nome varchar(100) not null,
-    rm varchar(9) not null,
-    id_locacao int not null,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    telefone VARCHAR(11) NOT NULL,
+    id_funcionario INT NOT NULL,
 
-    constraint fk_compartilhamento_locacao foreign key (id_locacao) references locacao(id)
+    CONSTRAINT fk_telefone_funcionario_funcionario FOREIGN KEY (id_funcionario) REFERENCES funcionario(id)
 
 );
 
-/* create table notificacao (
+CREATE TABLE telefone_aluno (
 
-); */
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    telefone VARCHAR(11) NOT NULL,
+    id_aluno INT NOT NULL,
+
+    CONSTRAINT fk_telefone_aluno_aluno FOREIGN KEY (id_aluno) REFERENCES aluno(id)
+
+);
+
+CREATE TABLE plano (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+CREATE TABLE locacao (
+
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    plano VARCHAR(9) NOT NULL,
+    data_locacao date NOT NULL,
+    id_aluno INT NOT NULL,
+    id_armario INT NOT NULL,
+    id_plano INT NOT NULL,
+
+    CONSTRAINT fk_locacao_aluno FOREIGN KEY (id_aluno) REFERENCES aluno(id),
+    CONSTRAINT fk_locacao_armario FOREIGN KEY (id_armario) REFERENCES armario(id),
+    CONSTRAINT fk_locacao_plano FOREIGN KEY (id_plano) REFERENCES plano(id)
+
+);
+
+CREATE TABLE compartilhamento (
+
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    rm VARCHAR(9) NOT NULL,
+    id_locacao INT NOT NULL,
+
+    CONSTRAINT fk_compartilhamento_locacao FOREIGN KEY (id_locacao) REFERENCES locacao(id)
+
+);
+
+/*
+
+CREATE TABLE notificacao (
+
+);
+
+*/
+
+SET AUTOCOMMIT = 0;
