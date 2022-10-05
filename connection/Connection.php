@@ -1,10 +1,10 @@
 <?php
 
-class Conexao {
+class Connection {
    
    private static $instance;
 
-   public static function getConexao() {
+   public static function getConnection() {
         if (!isset(self::$instance)) {
             self::$instance = new PDO('mysql:host=localhost;dbname=bdlocker', 'root', '', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
             self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -15,21 +15,5 @@ class Conexao {
    }
 
 }
-
-/*
-
-$dsn = 'mysql:dbname=bdarmariov3;host=localhost';
-$username = 'root';
-$password = '';
-
-try {
-    $pdo = new PDO($dsn, $username, $password);
-} catch (PDOException $e) {
-    echo 'Erro: ' . $e->getMessage();
-} catch (Exception $e) {
-    echo 'Erro genérico: ' . $e->getMessage();
-}
-
-*/
 
 ?>

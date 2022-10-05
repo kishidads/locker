@@ -1,50 +1,58 @@
 <?php
-include_once '../conexao/Conexao.php';
+include_once '../connection/Connection.php';
 include_once '../model/Pessoa.php';
 include_once '../model/Aluno.php';
 include_once '../dao/AlunoDAO.php';
+include_once 'Filter.php';
 
-// Retirando espaços no início e final de uma string
+$filter = new Filter();
 
-/*
+$filters = array(
+    'cpf' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validateCPF')),
+    'email' => FILTER_VALIDATE_EMAIL,
+    'senha' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validatePassword')),  
+    'nome' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validateName')),
+    'sobrenome' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validateName')),
+    'telefone' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validatePhone')),
+    'rm' => FILTER_VALIDATE_INT
+);
 
-function trimValue(&$value) {
-    $value = trim($value); 
-}
+$data = $filter->validate($_POST, $filters);
 
-array_walk($_POST, 'trimValue');
-
-*/
-
-$data = array_map('trim', $_POST);
-
-$data = array_map('htmlspecialchars', $data);
+echo 'Validação:<br><pre>' , var_dump($data) , '</pre>';
 
 $filters = array(
     'cpf' => FILTER_UNSAFE_RAW,
     'email' => FILTER_SANITIZE_EMAIL,
     'senha' => FILTER_UNSAFE_RAW,  
-    'nome' => FILTER_UNSAFE_RAW,
-    'sobrenome' => FILTER_UNSAFE_RAW,
+    'nome' => FILTER_SANITIZE_SPECIAL_CHARS,
+    'sobrenome' => FILTER_SANITIZE_SPECIAL_CHARS,
     'telefone' => FILTER_UNSAFE_RAW,
     'rm' => FILTER_SANITIZE_NUMBER_INT
 );
 
-$data = filter_var_array($data, $filters);
+$data = $filter->sanitize($_POST, $filters);
 
-echo '<pre>' , var_dump($data) , '</pre>';
+echo 'Sanitização:<br><pre>' , var_dump($data) , '</pre>';
 
-if(isset($_POST['cadastrar'])){
+if(isset($_POST['cadastrar'])) {
+
+    //Passando os dados pelo construtor
     
     $aluno = new Aluno(($data['cpf']), $data['email'], $data['senha'], $data['nome'], $data['sobrenome'], $data['telefone'], $data['rm']);
     
     /*
-    $aluno->setCpf($d['cpf']);
-    $aluno->setEmail($d['email']);
-    $aluno->setSenha($d['senha']);
-    $aluno->setNome($d['nome']);
-    $aluno->setSobrenome($d['sobrenome']);
-    $aluno->setRm($d['rm']);
+
+    //Passando os dados pelos métodos set
+
+    $aluno->setCpf($data['cpf']);
+    $aluno->setEmail($data['email']);
+    $aluno->setSenha($data['senha']);
+    $aluno->setNome($data['nome']);
+    $aluno->setSobrenome($data['sobrenome']);
+    $aluno->setTelefone($data['telefone']);
+    $aluno->setRm($data['rm']);
+    
     */
     
     $alunodao = new AlunoDAO();

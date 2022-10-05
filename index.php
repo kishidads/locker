@@ -4,8 +4,8 @@
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-switch($url)
-{
+switch($url) {
+
     case '/':
         echo "Tela inicial";
     break;
@@ -29,6 +29,7 @@ switch($url)
     default:
         echo "Erro 404";
     break;
+    
 }
 
 ?>

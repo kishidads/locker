@@ -16,7 +16,7 @@ class AlunoDAO {
             VALUES(:telefone, @id);
             COMMIT;';
 
-            $stmt = Conexao::getConexao()->prepare($sql);
+            $stmt = Connection::getConnection()->prepare($sql);
 
             $stmt->bindValue(':rm', $aluno->getRm(), PDO::PARAM_INT);
             $stmt->bindValue(':cpf', $aluno->getCpf(), PDO::PARAM_STR);
@@ -42,7 +42,7 @@ class AlunoDAO {
 
             $sql = 'SELECT * FROM aluno WHERE id = :id';
 
-            $stmt = Conexao::getConexao()->prepare($sql);
+            $stmt = Connection::getConnection()->prepare($sql);
 
             $stmt->bindValue(':id', $aluno->getId());
             
@@ -64,7 +64,7 @@ class AlunoDAO {
             rm = :rm, cpf = :cpf, email = :email, senha = :senha, nome = :nome, sobrenome = :sobrenome, telefone = :telefone
             WHERE id = :id';
 
-            $stmt = Conexao::getConexao()->prepare($sql);
+            $stmt = Connection::getConnection()->prepare($sql);
 
             $stmt->bindValue(':rm', $aluno->getRm(), PDO::PARAM_INT);
             $stmt->bindValue(':cpf', $aluno->getCpf(), PDO::PARAM_STR);
@@ -89,7 +89,7 @@ class AlunoDAO {
         try {
 
             $sql = 'DELETE FROM aluno WHERE id = :id';
-            $stmt = Conexao::getConexao()->prepare($sql);
+            $stmt = Connection::getConnection()->prepare($sql);
             $stmt->bindValue(':id', $aluno->getId());
 
             return $stmt->execute();

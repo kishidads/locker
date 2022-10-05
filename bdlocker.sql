@@ -1,3 +1,5 @@
+--mysql -u root -p
+
 --DROP DATABASE IF EXISTS bdlocker;
 
 CREATE DATABASE IF NOT EXISTS bdlocker;
@@ -125,3 +127,12 @@ CREATE TABLE notificacao (
 */
 
 SET AUTOCOMMIT = 0;
+
+INSERT INTO curso (codigo_curso, nome, duracao) VALUES
+('C', 'Administração Integral', 6),
+('B', 'Nutrição e Dietética Integral', 6),
+('D', 'Química Integral', 6),
+('L', 'Administração', 3),
+('N', 'Nutrição e Dietética', 3),
+('Q', 'Química', 3),
+('H', 'Desenvolvimento de Sistemas', 3);
