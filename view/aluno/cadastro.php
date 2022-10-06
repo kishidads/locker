@@ -42,10 +42,10 @@
             <input type="text" name="telefone" id="telefone" required>
 
             <label for="rm">RM</label>
-            <input type="text" name="rm" id="rm" required>
+            <input type="number" name="rm" id="rm" required>
 
             <label for="email">E-mail</label>
-            <input type="text" name="email" id="email" required>
+            <input type="email" name="email" id="email" required>
 
             <label for="cpf">CPF</label>
             <input type="text" name="cpf" id="cpf" required>

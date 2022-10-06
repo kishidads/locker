@@ -1,3 +1,9 @@
+<?php
+
+require_once 'session.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,6 +16,12 @@
     </style>
 </head>
 <body>
-    <h1>Tela meu cadastro</h1>   
+    <h1>Tela meu cadastro</h1>
+
+    <p><?php echo "olá, {$_SESSION['nome']}" ?></p>
+
+    <form action="../../controller/AuthenticationController.php" method="POST">
+        <button type='submit' name='sair'>Sair</button>
+    </form>
 </body>
 </html>
