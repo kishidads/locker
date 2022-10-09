@@ -10,7 +10,7 @@
             width: 20rem
         }
 
-        form {
+        fieldset > form {
             display: flex;
             flex-direction: column
         }

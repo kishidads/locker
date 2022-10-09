@@ -1,32 +1,24 @@
 <?php
-
 class Authentication {
 
     private $cpf;
     private $senha;
-
-    private $user;
 
     public function __construct($cpf = null, $senha = null) {
         $this->cpf = $cpf;
         $this->senha = $senha;
     }
 
-    public function getUser() {
-        return $this->user;
-    }
-    
-    public function setUser($user) {
-        $this->user = $user;
+    public function getCpf() {
+        return $this->cpf;
     }
 
-    private function checkCredentials() {
-        $sql = 'SELECT * FROM aluno WHERE cpf = :cpf';
-        $stmt = Connection::getConnection()->prepare($sql);
-        $stmt->bindValue(':cpf', $this->cpf);
+    public function setCpf($cpf) {
+        $this->cpf = $cpf;
+    }
 
-        if ($stmt->execute()) {
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    private function checkCredentials($user) {
+        if ($user) {
             if ($user['senha'] == $this->senha) {
                 return $user;
             }
@@ -34,15 +26,14 @@ class Authentication {
         return false;
     }
 
-    public function login() {
-        $user = $this->checkCredentials();
+    public function login($data) {
+        $user = $this->checkCredentials($data);
         if ($user) {
             session_start();
-            $this->user = $user;
             $_SESSION['authenticate'] = true;
             $_SESSION['id'] = $user['id'];
             $_SESSION['nome'] = $user['nome'];
-            return $user['id'];
+            return true;
         }
         return false;
     }

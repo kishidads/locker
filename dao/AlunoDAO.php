@@ -36,17 +36,34 @@ class AlunoDAO {
 
     }
 
-/*  public function read(Aluno $aluno) {
+    public function read($id) {
 
         try {
 
-            $sql = 'SELECT * FROM aluno WHERE id = :id';
+            $sql = 'SELECT aluno.id, rm, cpf, email, senha, nome, sobrenome, telefone
+            FROM aluno INNER JOIN telefone_aluno telefone
+            ON aluno.id = telefone.id_aluno
+            WHERE aluno.id = :id';
 
             $stmt = Connection::getConnection()->prepare($sql);
 
-            $stmt->bindValue(':id', $aluno->getId());
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $aluno = new Aluno();
+
+            $aluno->setCpf($data['cpf']);
+            $aluno->setEmail($data['email']);
+            $aluno->setSenha($data['senha']);
+            $aluno->setNome($data['nome']);
+            $aluno->setSobrenome($data['sobrenome']);
+            $aluno->setTelefone($data['telefone']);
+            $aluno->setRm($data['rm']);
+            $aluno->setId($data['id']);
             
-            return $stmt->execute();
+            return $aluno;
 
         } catch (Exception $e) {
 
@@ -60,19 +77,20 @@ class AlunoDAO {
 
         try {
 
-            $sql = 'UPDATE aluno SET
-            rm = :rm, cpf = :cpf, email = :email, senha = :senha, nome = :nome, sobrenome = :sobrenome, telefone = :telefone
-            WHERE id = :id';
+            $sql = 'START TRANSACTION;
+            UPDATE aluno SET senha = :senha, nome = :nome, sobrenome = :sobrenome
+            WHERE id = :id;
+            UPDATE telefone_aluno SET telefone = :telefone
+            WHERE id_aluno = :id;
+            COMMIT;';
 
             $stmt = Connection::getConnection()->prepare($sql);
 
-            $stmt->bindValue(':rm', $aluno->getRm(), PDO::PARAM_INT);
-            $stmt->bindValue(':cpf', $aluno->getCpf(), PDO::PARAM_STR);
-            $stmt->bindValue(':email', $aluno->getEmail(), PDO::PARAM_STR);
             $stmt->bindValue(':senha', $aluno->getSenha(), PDO::PARAM_STR);
             $stmt->bindValue(':nome', $aluno->getNome(), PDO::PARAM_STR);
             $stmt->bindValue(':sobrenome', $aluno->getSobrenome(), PDO::PARAM_STR);
             $stmt->bindValue(':telefone', $aluno->getTelefone(), PDO::PARAM_STR);
+            $stmt->bindValue(':id', $_SESSION['id'], PDO::PARAM_INT);
 
             return $stmt->execute();
 
@@ -83,6 +101,8 @@ class AlunoDAO {
         }
 
     }
+
+/*
 
     public function delete(Aluno $aluno) {
 
@@ -100,7 +120,9 @@ class AlunoDAO {
 
         }
 
-    } */
+    }
+    
+*/
     
 }
 

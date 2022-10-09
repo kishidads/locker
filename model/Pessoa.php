@@ -10,13 +10,7 @@ abstract class Pessoa {
     private $sobrenome;
     private $telefone;
 
-    protected function __construct($cpf, $email, $senha, $nome, $sobrenome, $telefone) {
-        $this->cpf = $cpf;
-        $this->email = $email;
-        $this->senha = $senha;
-        $this->nome = $nome;
-        $this->sobrenome = $sobrenome;
-        $this->telefone = $telefone;
+    protected function __construct() {
     }
 
     public function getId() {

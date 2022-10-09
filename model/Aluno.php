@@ -5,12 +5,15 @@ final class Aluno extends Pessoa {
     private $rm;
     private $curso;
 
-    public function __construct($cpf, $email, $senha, $nome, $sobrenome, $telefone, $rm) {
-        parent::__construct($cpf, $email, $senha, $nome, $sobrenome, $telefone);
-        $this->rm = $rm;
+    public function __construct() {
+        parent::__construct();
     }
 
     public function getRm() {
+        return $this->rm;
+    }
+    
+    public function getCurso() {
         return $this->rm;
     }
     
@@ -18,10 +21,6 @@ final class Aluno extends Pessoa {
         $this->rm = $rm;
     }
 
-    public function getCurso() {
-        return $this->rm;
-    }
-    
     public function setCurso(Curso $curso) {
         $this->curso[] = $curso;
     }

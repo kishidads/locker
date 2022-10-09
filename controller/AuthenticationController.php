@@ -4,6 +4,7 @@ if (isset($_POST['entrar'])) {
 
     include_once '../connection/Connection.php';
     include_once '../model/Authentication.php';
+    include_once '../dao/AuthenticationDAO.php';
     //include_once '../model/Filter.php';
 
 /*  
@@ -21,14 +22,16 @@ if (isset($_POST['entrar'])) {
 */
     
     $login = new Authentication($_POST['cpf'], $_POST['senha']);
+
+    $authenticationdao = new AuthenticationDAO();
+    $data = $authenticationdao->authenticate($login->getCpf());
     
-    if ($login->login()) {
-        
-        echo '<pre>' , var_dump($login->getUser()) , '</pre>';
-                
-        //header('Location: /armarios');
+    if ($login->login($data)) {
+                        
+        header('Location: /meu-cadastro');
     
     }
+
 
 }
 
