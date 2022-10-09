@@ -1,9 +1,5 @@
 <?php
 
-include_once 'connection/Connection.php';
-include_once 'model/Pessoa.php';
-include_once 'model/Aluno.php';
-include_once 'dao/AlunoDAO.php';
 require_once 'session.php';
 
 ?>

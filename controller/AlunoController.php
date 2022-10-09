@@ -6,7 +6,7 @@ if (isset($_POST['cadastrar'])) {
     include_once '../model/Pessoa.php';
     include_once '../model/Aluno.php';
     include_once '../dao/AlunoDAO.php';
-    include_once '../model/Filter.php';
+    include_once '../controller/Filter.php';
 
     $filter = new Filter();
 
@@ -66,7 +66,7 @@ if (isset($_POST['alterar'])) {
     include_once '../model/Pessoa.php';
     include_once '../model/Aluno.php';
     include_once '../dao/AlunoDAO.php';
-    include_once '../model/Filter.php';
+    include_once '../controller/Filter.php';
     require_once '../session.php';
 
     $filter = new Filter();
@@ -102,9 +102,12 @@ if (isset($_POST['alterar'])) {
     $aluno->setSobrenome($data['sobrenome']);
     $aluno->setTelefone($data['telefone']);
     $aluno->setId($_SESSION['id']);
+
+    $_SESSION['nome'] = $aluno->getNome();
     
     $alunodao = new AlunoDAO();
     $alunodao->update($aluno);
 
     //header('Location: ../');
+    
 }
