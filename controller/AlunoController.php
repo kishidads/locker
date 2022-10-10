@@ -1,12 +1,34 @@
 <?php
 
+
+//include '../libs/vendor/autoload.php';
+
+
+
+  
+ 
+
+
+
+
+
+
 if (isset($_POST['cadastrar'])) {
+
+    
+
 
     include_once '../connection/Connection.php';
     include_once '../model/Pessoa.php';
     include_once '../model/Aluno.php';
     include_once '../dao/AlunoDAO.php';
     include_once '../controller/Filter.php';
+    include_once '../controller/EmailController.php';
+    
+    $email =  new EnviarEmail();
+
+    $purl = EnviarEmail::criarhashes();
+    //echo $purl;
 
     $filter = new Filter();
 
@@ -17,7 +39,8 @@ if (isset($_POST['cadastrar'])) {
         'nome' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validateName')),
         'sobrenome' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validateName')),
         'telefone' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validatePhone')),
-        'rm' => FILTER_VALIDATE_INT
+        'rm' => FILTER_VALIDATE_INT,
+        'purl' => $purl
     );
 
     $data = $filter->validate($_POST, $filters);
@@ -31,18 +54,46 @@ if (isset($_POST['cadastrar'])) {
         'nome' => FILTER_SANITIZE_SPECIAL_CHARS,
         'sobrenome' => FILTER_SANITIZE_SPECIAL_CHARS,
         'telefone' => FILTER_UNSAFE_RAW,
-        'rm' => FILTER_SANITIZE_NUMBER_INT
+        'rm' => FILTER_SANITIZE_NUMBER_INT,
     );
 
     $data = $filter->sanitize($_POST, $filters);
 
+
+
     echo 'Sanitização:<br><pre>' , var_dump($data) , '</pre>';
+
+
+
+    
+//============================================================
+    
+    //tentando achar um lugar certo para instanciar a classe EnviarEmail
+    $email_usu = $_POST['email'];
+
+  
+    
+
+    $resultado = $email->confirmarEmail($email_usu, $purl);
+
+    if($resultado = true){
+        echo 'Email Enviado Para confirmação<br>';
+    }else{
+        echo 'Ocorreu um Erro no envio do email';
+    }
+
+ //=========================================================
+    
+    echo $purl;
 
     //Passando os dados pelo construtor
     
     //$aluno = new Aluno($data['cpf'], $data['email'], $data['senha'], $data['nome'], $data['sobrenome'], $data['telefone'], $data['rm']);
     
     //Passando os dados pelos métodos set
+
+
+
 
     $aluno = new Aluno();
 
@@ -53,9 +104,20 @@ if (isset($_POST['cadastrar'])) {
     $aluno->setSobrenome($data['sobrenome']);
     $aluno->setTelefone($data['telefone']);
     $aluno->setRm($data['rm']);
+    $aluno->setPurl($purl);
     
     $alunodao = new AlunoDAO();
     $alunodao->create($aluno);
+
+
+
+
+
+
+
+
+
+
 
     //header('Location: ../');
 }
@@ -111,3 +173,4 @@ if (isset($_POST['alterar'])) {
     //header('Location: ../');
     
 }
+

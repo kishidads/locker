@@ -9,8 +9,8 @@ class AlunoDAO {
         try {
 
             $sql = 'START TRANSACTION;
-            INSERT INTO aluno (rm, cpf, email, senha, nome, sobrenome)
-            VALUES (:rm, :cpf, :email, :senha, :nome, :sobrenome);
+            INSERT INTO aluno (rm, cpf, email, senha, nome, sobrenome, purl)
+            VALUES (:rm, :cpf, :email, :senha, :nome, :sobrenome, :purl);
             SELECT LAST_INSERT_ID() INTO @id;
             INSERT INTO telefone_aluno (telefone, id_aluno)
             VALUES(:telefone, @id);
@@ -25,6 +25,7 @@ class AlunoDAO {
             $stmt->bindValue(':nome', $aluno->getNome(), PDO::PARAM_STR);
             $stmt->bindValue(':sobrenome', $aluno->getSobrenome(), PDO::PARAM_STR);
             $stmt->bindValue(':telefone', $aluno->getTelefone(), PDO::PARAM_STR);
+            $stmt->bindValue(':purl', $aluno->getPurl(), PDO::PARAM_STR);
             
             return $stmt->execute();
 
