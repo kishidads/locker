@@ -1,9 +1,3 @@
-<?php
-
-require_once 'session.php';
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -38,13 +32,15 @@ require_once 'session.php';
 
     <p><?php echo "olá, {$_SESSION['nome']}" ?></p>
 
-    <form action="../../controller/AuthenticationController.php" method="POST">
+    <form action="/login" method="POST">
         <button type='submit' name='sair'>Sair</button>
     </form>
 
     <fieldset>
+
         <legend>Meu cadastro</legend>
-        <form action="../../controller/AlunoController.php" method="POST">
+
+        <form action="/meu-cadastro" method="POST">
 
             <label for="nome">Nome</label>
             <input type="text" name="nome" id="nome" value="<?php echo $aluno->getNome() ?>" required>
@@ -70,6 +66,7 @@ require_once 'session.php';
             <button type="submit" name="alterar">Salvar alterações</button>
 
         </form>
+
     </fieldset>
 </body>
 </html>

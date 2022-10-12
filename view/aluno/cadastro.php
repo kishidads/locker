@@ -30,7 +30,7 @@
 <body>
     <fieldset>
         <legend>Cadastro de aluno</legend>
-        <form action="../../controller/AlunoController.php" method="POST">
+        <form action="/cadastro" method="POST">
 
             <label for="nome">Nome</label>
             <input type="text" name="nome" id="nome" required>

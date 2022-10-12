@@ -10,12 +10,7 @@ class Armario {
     private $situacao;
 
 
-    function __construct($secao, $numero, $proximidade, $andar, $situacao) {
-        $this->secao = $secao;
-        $this->numero = $numero;
-        $this->proximidade = $proximidade;
-        $this->andar = $andar;
-        $this->situacao = $situacao;
+    function __construct() {
     }
 
     public function getId() {
@@ -58,7 +53,7 @@ class Armario {
         $this->proximidade = $proximidade;
     }
 
-    public function seAndar($andar) {
+    public function setAndar($andar) {
         $this->andar = $andar;
     }
 

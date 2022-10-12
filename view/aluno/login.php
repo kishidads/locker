@@ -29,7 +29,7 @@
 <body>
     <fieldset>
         <legend>Login</legend>
-        <form action="../../controller/AuthenticationController.php" method="POST">
+        <form action="/login" method="POST">
 
             <label for="cpf">CPF</label>
             <input type="text" name="cpf" id="cpf" required>

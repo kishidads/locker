@@ -2,14 +2,13 @@
 
 class Filter {
 
-    function __construct() {
-    }
-
-    function validate($data, $filters) {
+    public static function validate($data, $filters) {
         $data = filter_var_array($data, $filters);
 
         return $data;
     }
+
+    //Pessoa ----------------------------------------------
 
     private function validateCPF($cpf) {
         //Extração dos números
@@ -60,7 +59,16 @@ class Filter {
         return false;
     }
 
-    function sanitize($data, $filters) {
+    //Armários ----------------------------------------------
+
+    private function validateSecao($secao) {
+        if (preg_match('/^[a-z]{1,2}$/i', $secao)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function sanitize($data, $filters) {
         $data = array_map('trim', $data);
         
         $data = filter_var_array($data, $filters);
