@@ -1,7 +1,7 @@
 <?php
 
 class AlunoDAO {
-    
+
     public function create(Aluno $aluno) {
 
         //echo '<pre>' , var_dump($aluno) , '</pre>';

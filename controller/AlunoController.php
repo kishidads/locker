@@ -23,13 +23,14 @@ if (isset($_POST['cadastrar'])) {
     include_once '../model/Aluno.php';
     include_once '../dao/AlunoDAO.php';
     include_once '../controller/Filter.php';
-    include_once '../controller/EmailController.php';
+    include_once '../controller/EnviarEmail.php';
     
     $email =  new EnviarEmail();
 
     $purl = EnviarEmail::criarhashes();
     //echo $purl;
 
+    
     $filter = new Filter();
 
     $filters = array(
@@ -39,8 +40,8 @@ if (isset($_POST['cadastrar'])) {
         'nome' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validateName')),
         'sobrenome' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validateName')),
         'telefone' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validatePhone')),
-        'rm' => FILTER_VALIDATE_INT,
-        'purl' => $purl
+        'rm' => FILTER_VALIDATE_INT
+        
     );
 
     $data = $filter->validate($_POST, $filters);
@@ -85,6 +86,7 @@ if (isset($_POST['cadastrar'])) {
  //=========================================================
     
     echo $purl;
+  
 
     //Passando os dados pelo construtor
     
@@ -92,11 +94,12 @@ if (isset($_POST['cadastrar'])) {
     
     //Passando os dados pelos métodos set
 
-
+    
 
 
     $aluno = new Aluno();
 
+     
     $aluno->setCpf($data['cpf']);
     $aluno->setEmail($data['email']);
     $aluno->setSenha($data['senha']);
@@ -108,6 +111,10 @@ if (isset($_POST['cadastrar'])) {
     
     $alunodao = new AlunoDAO();
     $alunodao->create($aluno);
+    
+
+
+  
 
 
 
@@ -171,6 +178,8 @@ if (isset($_POST['alterar'])) {
     $alunodao->update($aluno);
 
     //header('Location: ../');
+
+    
     
 }
 
