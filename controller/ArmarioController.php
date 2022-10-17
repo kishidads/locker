@@ -6,6 +6,8 @@ class ArmarioController {
 
         if (isset($_POST['cadastrar'])) {
 
+            require_once 'session.php';
+
             include_once 'connection/Connection.php';
             include_once 'model/Armario.php';
             include_once 'dao/ArmarioDAO.php';
@@ -25,7 +27,7 @@ class ArmarioController {
         
             $filters = array(
                 'secao' => FILTER_SANITIZE_SPECIAL_CHARS,
-                'proximidade' => FILTER_SANITIZE_SPECIAL_CHARS,  
+                'local' => FILTER_SANITIZE_SPECIAL_CHARS,  
                 'andar' => FILTER_SANITIZE_NUMBER_INT,
                 'situacao' => FILTER_SANITIZE_SPECIAL_CHARS,
                 'quantidade' => FILTER_SANITIZE_NUMBER_INT
@@ -33,12 +35,12 @@ class ArmarioController {
         
             $data = $filter->sanitize($_POST, $filters);
         
-            echo 'Sanitização:<br><pre>' , var_dump($_POST) , '</pre>'; 
+            //echo 'Sanitização:<br><pre>' , var_dump($_POST) , '</pre>'; 
         
             $armario = new Armario();
         
             $armario->setSecao($data['secao']);
-            $armario->setProximidade($data['proximidade']);
+            $armario->setLocal($data['local']);
             $armario->setAndar($data['andar']);
             $armario->setSituacao($data['situacao']);
         
@@ -56,22 +58,22 @@ class ArmarioController {
 
     public static function listar() {
         
+        require_once 'session.php';
+        
         include_once 'connection/Connection.php';
         include_once 'model/Armario.php';
         include_once 'dao/ArmarioDAO.php';
         include_once 'controller/Filter.php';
-        require_once 'session.php';
 
         if (isset($_POST['listar'])) {
     
-            $proximidade = $_POST['proximidade'];
+            $local = $_POST['local'];
         
             $armariodao = new ArmarioDAO();
-            $armarios = $armariodao->read($proximidade);
+            $armarios = $armariodao->read($local);
         
-            echo '<pre>' , var_dump($armarios) , '</pre>';
+            //echo '<pre>' , var_dump($armarios) , '</pre>';
 
-            
         }
         
         include 'view/armarios/armarios.php';

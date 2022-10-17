@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css');
+
+:root {
+    --primary-font: 'Montserrat', sans-serif;
+    --secundary-font: 'Poiret One', sans-serif;
+    --action-font: ;
+}
+
+* {
+    padding: 0;
+    border: none;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    min-height: 3rem;
+    height: 6vh;
+    padding: 5px 10px;
+    background-color: #267675;
+    display: flex;
+    justify-content: space-between;
+}
+
+header img {
+    max-height: 100%;
+}
+
+header nav {
+    align-self: center;
+}
+
+header nav ul {
+    font-family: var(--primary-font);
+    font-size: 1.1rem;
+    font-weight: 800;
+    display: flex;
+}
+
+header nav a {
+    color: #fff;
+    padding: 10px;
+}
+
+header a:hover {
+    color: #ffc803;
+}
+
+main {
+    height: 94vh;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+footer {
+    background-color: #267675;
+}
+
+.footer-container {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-container > div {
+    margin: 1rem 1rem;
+}
+
+.footer-container ul {
+    font-family: var(--primary-font);
+    font-size: 1.1rem;
+    font-weight: 800;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-container h4 {
+    margin: 1rem 0;
+    font-family: var(--primary-font);
+    font-size: 1.1rem;
+    color: #424242;
+}
+
+.footer-container h4::before {
+    content: '';
+    width: 3rem;
+    height: 0.1rem;
+    background-color: #ffc803;
+    display: block;
+    position: relative;
+    bottom: -1.5rem;
+}
+
+.footer-container li > a {
+    padding: 0.1rem 0;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #fff;
+    position: relative;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.footer-container > div:not(.social-media) li > a:hover {
+    left: 0.3rem;
+}
+
+.footer-container li > a:hover {
+    color: #ffc803;
+}
+
+.footer-container div:nth-child(3) ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.footer-container div:nth-child(3) ul li a i {
+    font-size: 1.6rem;
+}
+
+.footer-container div:last-child {
+    width: 10rem;
+    height: 10rem;
+    text-align: center;
+}
+
+.footer-container img {
+    max-height: 100%;
+}
+
+/* Lockers */
+
+.lockers-section {
+    width: 70%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.lockers-header h1 {
+    padding: 2rem 0 0rem;
+    font-family: var(--primary-font);
+    font-weight: 600;
+    text-align: center;
+}
+
+.lockers-section form {
+    font-family: var(--primary-font);
+    font-size: 1.4rem;
+    text-align: end;
+}
+
+.lockers-section select {
+    font-family: var(--primary-font);
+    font-size: 1.2rem;
+}
+
+.lockers-grid-container {
+    width: 100%;
+    background-color: #fafafa;
+    border-radius: 12px;
+    box-shadow: inset 0 0 5px #424242;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: auto;
+    display: flex;
+}
+
+.lockers-grid {
+    padding-right: 2rem;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.grid-item {
+    width: calc(100px / 1.4);
+    height: calc(190px / 1.4);
+    padding: 50% 0;
+    border: 0.1px solid #ffc803;
+    border-radius: 12px;
+    font-family: var(--primary-font);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    background-image: url("../img/locker.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.disponivel {
+    background-color: #319190;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.disponivel:hover {
+    transform: scale(1.04);
+    position: relative;
+}
+
+.indisponivel {
+    background-image: url("../img/indisponivel.svg"), url("../img/locker.svg");
+    background-repeat: no-repeat, no-repeat;
+    background-size: 40%, cover;
+    background-color: #319190;
+    opacity: 50%;
+    cursor: not-allowed;
+}
+
+.alugado {
+    background-color: #319190;
+    opacity: 30%;
+    cursor: not-allowed;
+}
+
+
+
+
+

@@ -5,33 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de armários</title>
-    <style>
-        fieldset {
-            width: 20rem
-        }
 
-        fieldset > form {
-            display: flex;
-            flex-direction: column
-        }
-
-/*
-
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        input[type='number'] {
-            -moz-appearance:textfield;
-        }
-        
-*/
-
-    </style>
+    <link rel="stylesheet" href="public/assets/css/style.css">
 </head>
 <body>
+    <?php include "public/header.php" ?>
+
     <fieldset>
         <legend>Cadastro de armários</legend>
         <form action="/cadastro-armarios" method="POST">
@@ -42,8 +21,8 @@
             <label for="quantidade">Quantidade</label>
             <input type="number" name="quantidade" id="quantidade" min="1" max="20" value="1" required>
 
-            <label for="proximidade">Proximidade</label>
-            <select name="proximidade" id="proximidade" required>
+            <label for="local">Proximidade</label>
+            <select name="local" id="local" required>
                 <option value="administracao">Corredor Administração</option>
                 <option value="quimica">Corredor Química</option>
                 <option value="nutricao">Corredor Nutrição</option>
@@ -65,5 +44,7 @@
             <button type="submit" name="cadastrar">Cadastrar</button>
         </form>
     </fieldset>
+
+    <?php include "public/footer.html" ?>
 </body>
 </html>

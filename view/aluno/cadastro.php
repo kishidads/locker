@@ -5,29 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <style>
-        fieldset {
-            width: 20rem
-        }
 
-        fieldset > form {
-            display: flex;
-            flex-direction: column
-        }
-
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        input[type='number'] {
-            -moz-appearance:textfield;
-        }
-
-    </style>
+    <link rel="stylesheet" href="public/assets/css/style.css">
 </head>
 <body>
+    <?php include "public/header.php" ?>
     <fieldset>
         <legend>Cadastro de aluno</legend>
         <form action="/cadastro" method="POST">
@@ -57,5 +39,6 @@
 
         </form>
     </fieldset>
+    <?php include "public/footer.html" ?>
 </body>
 </html>

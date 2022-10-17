@@ -10,14 +10,14 @@ class ArmarioDAO {
             try {
                 
                 $sql =
-                'INSERT INTO armario (secao, numero, proximidade, andar, situacao)
-                VALUES (:secao, :numero, :proximidade, :andar, :situacao);';
+                'INSERT INTO armario (secao, numero, local, andar, situacao)
+                VALUES (:secao, :numero, :local, :andar, :situacao);';
 
                 $stmt = Connection::getConnection()->prepare($sql);
 
                 $stmt->bindValue(':secao', $armario->getSecao(), PDO::PARAM_STR);
                 $stmt->bindValue(':numero', $i, PDO::PARAM_INT);
-                $stmt->bindValue(':proximidade', $armario->getProximidade(), PDO::PARAM_STR);
+                $stmt->bindValue(':local', $armario->getLocal(), PDO::PARAM_STR);
                 $stmt->bindValue(':andar', $armario->getAndar(), PDO::PARAM_INT);
                 $stmt->bindValue(':situacao', $armario->getSituacao(), PDO::PARAM_STR);
 
@@ -31,22 +31,17 @@ class ArmarioDAO {
         }
     }
 
-    public function read($proximidade) {
+    public function read($local) {
 
         try {
-
-            if ($proximidade) {
-                $sql = 'SELECT *
-                FROM armario
-                WHERE proximidade = :proximidade';
-            } else {
-                $sql = 'SELECT *
-                FROM armario';
-            }
+            $sql = 'SELECT *
+            FROM armario
+            WHERE local = :local
+            ORDER BY secao, numero ASC';
 
             $stmt = Connection::getConnection()->prepare($sql);
 
-            $stmt->bindValue(':proximidade', $proximidade);
+            $stmt->bindValue(':local', $local);
             $stmt->execute();
 
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -58,6 +53,7 @@ class ArmarioDAO {
                 $list[] = $this->list($row);
 
             }
+
 
             return $list;
 
@@ -75,7 +71,7 @@ class ArmarioDAO {
         $armario->setId($row['id']);
         $armario->setSecao($row['secao']);
         $armario->setNumero($row['numero']);
-        $armario->setProximidade($row['proximidade']);
+        $armario->setLocal($row['local']);
         $armario->setAndar($row['andar']);
         $armario->setSituacao($row['situacao']);
 

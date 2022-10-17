@@ -5,10 +5,9 @@ class Armario {
     private $id;
     private $secao;
     private $numero;
-    private $proximidade;
+    private $local;
     private $andar;
     private $situacao;
-
 
     function __construct() {
     }
@@ -25,8 +24,8 @@ class Armario {
         return $this->numero;
     }
 
-    public function getProximidade() {
-        return $this->proximidade;
+    public function getLocal() {
+        return $this->local;
     }
 
     public function getAndar() {
@@ -49,8 +48,8 @@ class Armario {
         $this->numero = $numero;
     }
 
-    public function setProximidade($proximidade) {
-        $this->proximidade = $proximidade;
+    public function setLocal($local) {
+        $this->local = $local;
     }
 
     public function setAndar($andar) {
