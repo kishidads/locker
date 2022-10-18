@@ -1,6 +1,8 @@
 <?php
 
-//include 'Controller/AlunoController.php';
+include 'Controller/AlunoController.php';
+include 'Controller/AuthenticationController.php';
+include 'Controller/ArmarioController.php';
 
 
 
@@ -13,23 +15,33 @@ switch($url) {
     break;
 
     case '/login':
-        include 'view/aluno/login.php';
+        AuthenticationController::authentication();
     break;
-        
-    case '/cadastro':
-        include 'view/aluno/cadastro.php';
-    break;
+
 
     case '/confirmaremail':
         include 'view/confirmaremail.php';
     break;    
 
-    case '/armarios':
-        include 'view/armarios.php';;
+    // case '/armarios':
+    //     include 'view/armarios.php';;
+    // break;    
+
+    case '/cadastro':
+        AlunoController::cadastrar();
+
     break;
 
     case '/meu-cadastro':
-        include 'view/aluno/meu-cadastro.php';;
+        AlunoController::alterar();
+    break;
+
+    case '/cadastro-armarios':
+        ArmarioController::cadastrar();
+    break;
+
+    case '/armarios':
+        ArmarioController::listar();
     break;
 
      

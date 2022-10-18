@@ -11,7 +11,7 @@ CREATE TABLE armario (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     secao VARCHAR(3) NOT NULL,
     numero INT NOT NULL,
-    proximidade VARCHAR(20),
+    local VARCHAR(20),
     andar VARCHAR(5),
     situacao VARCHAR(12) NOT NULL,
 

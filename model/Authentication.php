@@ -4,7 +4,7 @@ class Authentication {
     private $cpf;
     private $senha;
 
-    public function __construct($cpf = null, $senha = null) {
+    public function __construct($cpf, $senha) {
         $this->cpf = $cpf;
         $this->senha = $senha;
     }
