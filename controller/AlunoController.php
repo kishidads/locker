@@ -11,6 +11,13 @@ class AlunoController {
             include_once 'model/Aluno.php';
             include_once 'dao/AlunoDAO.php';
             include_once 'controller/Filter.php';
+            include_once '../controller/EnviarEmail.php';
+    
+            $email =  new EnviarEmail();
+        
+            $purl = EnviarEmail::criarhashes();
+            //echo $purl;
+        
         
             $filter = new Filter();
         
@@ -41,6 +48,23 @@ class AlunoController {
             $data = $filter->sanitize($_POST, $filters);
         
             echo 'Sanitização:<br><pre>' , var_dump($data) , '</pre>';
+
+            //============================================================
+                
+                //tentando achar um lugar certo para instanciar a classe EnviarEmail
+                $email_usu = $_POST['email'];
+
+                $resultado = $email->confirmarEmail($email_usu, $purl);
+
+                if($resultado = true){
+                    echo 'Email Enviado Para confirmação<br>';
+                }else{
+                    echo 'Ocorreu um Erro no envio do email';
+                }
+
+            //=========================================================
+    
+    echo $purl;
             
             $aluno = new Aluno();
         
@@ -51,6 +75,7 @@ class AlunoController {
             $aluno->setSobrenome($data['sobrenome']);
             $aluno->setTelefone($data['telefone']);
             $aluno->setRm($data['rm']);
+            $aluno->setPurl($purl);
             
             $alunodao = new AlunoDAO();
             $alunodao->create($aluno);
@@ -59,10 +84,13 @@ class AlunoController {
         
         include_once 'view/aluno/cadastro.php';
 
+
     }
 
     public static function alterar() {
 
+
+  
         require_once 'session.php';
 
         include_once 'connection/Connection.php';
@@ -70,6 +98,7 @@ class AlunoController {
         include_once 'model/Aluno.php';
         include_once 'dao/AlunoDAO.php';
         include_once 'controller/Filter.php';
+
     
         $alunodao = new AlunoDAO();
         $aluno = $alunodao->read($_SESSION['id']);
@@ -121,4 +150,6 @@ class AlunoController {
         
     }
 
+
 }
+

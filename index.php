@@ -4,6 +4,8 @@ include 'Controller/AlunoController.php';
 include 'Controller/AuthenticationController.php';
 include 'Controller/ArmarioController.php';
 
+
+
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 switch($url) {
@@ -16,8 +18,18 @@ switch($url) {
         AuthenticationController::authentication();
     break;
 
+
+    case '/confirmaremail':
+        include 'view/confirmaremail.php';
+    break;    
+
+    // case '/armarios':
+    //     include 'view/armarios.php';;
+    // break;    
+
     case '/cadastro':
         AlunoController::cadastrar();
+
     break;
 
     case '/meu-cadastro':
@@ -32,10 +44,14 @@ switch($url) {
         ArmarioController::listar();
     break;
 
+     
     default:
-        echo "Erro 404";
+        echo "Erro 404";       
     break;
     
 }
+
+
+
 
 ?>
