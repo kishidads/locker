@@ -10,20 +10,30 @@
 </head>
 <body>
     <?php include "public/header.php" ?>
-    <fieldset>
-        <legend>Login</legend>
-        <form action="/login" method="POST">
 
-            <label for="cpf">CPF</label>
-            <input type="text" name="cpf" id="cpf" required>
+    <section class="login">
+        <div class="login-header">
+            <h1>Entrar</h1>
+        </div>
+        <div class="login-wrapper">
+            <h2>Faça login na sua conta da Locketec</h2>
+            <form action="/login" method="POST">
+                <fieldset>
+                    <legend>Login</legend>
 
-            <label for="senha">Senha</label>
-            <input type="password" name="senha" id="senha" required>
-        
-            <button type="submit" name="entrar">Entrar</button>
+                    <label for="cpf">CPF</label>
+                    <input type="text" name="cpf" id="cpf" required>
 
-        </form>
-    </fieldset>
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" id="senha" required>
+                
+                    <button type="submit" name="entrar">Entrar</button>
+
+                </fieldset>
+            </form>
+        </div>
+    </section>
+
     <?php include "public/footer.html" ?>
 </body>
 </html>

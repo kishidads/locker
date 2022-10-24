@@ -1,8 +1,10 @@
 <?php
 
-include 'Controller/AlunoController.php';
-include 'Controller/AuthenticationController.php';
-include 'Controller/ArmarioController.php';
+include 'controller/AlunoController.php';
+include 'controller/FuncionarioController.php';
+include 'controller/ArmarioController.php';
+include 'controller/CursoController.php';
+include 'controller/AuthenticationController.php';
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -24,11 +26,39 @@ switch($url) {
         AlunoController::alterar();
     break;
 
+    case '/listar-aluno':
+        //AlunoController::listar();
+    break;
+
+    case '/cadastro-funcionario':
+        FuncionarioController::cadastrar();
+    break;
+
+    case '/listar-funcionario':
+        //FuncionarioController::listar();
+    break;
+
+    case '/cadastro-curso':
+        CursoController::cadastrar();
+    break;
+
+    case '/listar-curso':
+        CursoController::listar();
+    break;
+
+    case '/alterar-curso':
+        CursoController::alterar();
+    break;
+
+    case '/excluir-curso':
+        CursoController::excluir();
+    break;
+
     case '/cadastro-armarios':
         ArmarioController::cadastrar();
     break;
 
-    case '/armarios':
+    case '/listar-armarios':
         ArmarioController::listar();
     break;
 

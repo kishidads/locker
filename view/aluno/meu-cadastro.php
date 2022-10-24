@@ -11,17 +11,8 @@
 <body>
     <?php include "public/header.php" ?>
     <h1>Tela meu cadastro</h1>
-
-    <p><?php echo "olá, {$_SESSION['nome']}" ?></p>
-
-    <form action="/login" method="POST">
-        <button type='submit' name='sair'>Sair</button>
-    </form>
-
     <fieldset>
-
         <legend>Meu cadastro</legend>
-
         <form action="/meu-cadastro" method="POST">
 
             <label for="nome">Nome</label>

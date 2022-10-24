@@ -7,10 +7,7 @@ class Curso {
     private $nome;
     private $duracao;
 
-    public function __construct($codigoCurso, $nome, $duracao) {
-        $this->codigoCurso = $codigoCurso;
-        $this->nome = $nome;
-        $this->duracao = $duracao;
+    public function __construct() {
     }
 
     public function getId() {

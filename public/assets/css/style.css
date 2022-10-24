@@ -4,11 +4,11 @@
 
 :root {
     --primary-font: 'Montserrat', sans-serif;
-    --secundary-font: 'Poiret One', sans-serif;
-    --action-font: ;
+/*     --secundary-font: 'Poiret One', sans-serif;
+    --action-font: ; */
 }
 
-* {
+* :not(dialog) {
     padding: 0;
     border: none;
     margin: 0;
@@ -49,15 +49,37 @@ header nav ul {
     font-size: 1.1rem;
     font-weight: 800;
     display: flex;
+    align-items: center;
 }
 
 header nav a {
     color: #fff;
-    padding: 10px;
+    padding: .8rem;
 }
 
 header a:hover {
     color: #ffc803;
+}
+
+header nav p {
+    color: #fff;
+    padding: .8rem;
+}
+
+header nav button {
+    padding: .4rem;
+    border-radius: .2rem;
+    background-color: #ffc803;
+    color: #fff;
+    font-family: var(--primary-font);
+    font-size: .8rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+}
+
+header nav button:hover {
+    background-color: #fdd954;
 }
 
 main {
@@ -74,6 +96,22 @@ input[type='number'] {
     -moz-appearance:textfield;
 }
 
+section {
+    width: 70%;
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section h1 {
+    padding: 2rem 0 1rem;
+    font-family: var(--primary-font);
+    font-weight: 600;
+    text-align: center;
+}
+
 footer {
     background-color: #267675;
 }
@@ -81,6 +119,7 @@ footer {
 .footer-container {
     width: 70%;
     margin: 0 auto;
+    background-color: #267675;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -108,7 +147,7 @@ footer {
 .footer-container h4::before {
     content: '';
     width: 3rem;
-    height: 0.1rem;
+    height: .1rem;
     background-color: #ffc803;
     display: block;
     position: relative;
@@ -116,17 +155,17 @@ footer {
 }
 
 .footer-container li > a {
-    padding: 0.1rem 0;
-    font-size: 0.9rem;
+    padding: .1rem 0;
+    font-size: .9rem;
     font-weight: 400;
     color: #fff;
     position: relative;
     left: 0;
-    transition: all 0.3s ease;
+    transition: all .3s ease;
 }
 
 .footer-container > div:not(.social-media) li > a:hover {
-    left: 0.3rem;
+    left: .3rem;
 }
 
 .footer-container li > a:hover {
@@ -140,7 +179,13 @@ footer {
 }
 
 .footer-container div:nth-child(3) ul li a i {
+    padding: 0 .6rem;
     font-size: 1.6rem;
+}
+
+.footer-container div:nth-child(3) ul li a i:hover {
+    font-size: 1.6rem;
+    transform: scale(1.1);
 }
 
 .footer-container div:last-child {
@@ -153,97 +198,237 @@ footer {
     max-height: 100%;
 }
 
-/* Lockers */
+/* Login */
 
-.lockers-section {
-    width: 70%;
-    height: 100%;
-    margin: 0 auto;
+section.login h1 {
+    padding: 2rem;
+    font-family: var(--primary-font);
+    font-weight: 600;
+    text-align: center;
+}
+
+.login-wrapper {
+    width: 40%;
+    padding: 3rem 4rem;
+    border-radius: 12px;
+    background-color: #fafafa;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-wrapper h2 {
+    padding: 0 0 1.5rem;
+    font-family: var(--primary-font);
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+legend {
+    display: none;
+}
+
+section.login form * {
+    margin: .2rem;
+}
+
+section.login fieldset {
+    font-family: var(--primary-font);
+    font-size: 1rem;
     display: flex;
     flex-direction: column;
 }
 
-.lockers-header h1 {
-    padding: 2rem 0 0rem;
-    font-family: var(--primary-font);
-    font-weight: 600;
-    text-align: center;
-}
-
-.lockers-section form {
-    font-family: var(--primary-font);
+section.login input {
+    height: 2.5rem;
+    padding: .2rem .5rem;
+    border: 1px solid #bdbdbd;
+    border-radius: .2rem;
     font-size: 1.4rem;
-    text-align: end;
+    font-weight: 400;
 }
 
-.lockers-section select {
+section.login input:focus {
+    outline-color: #267675;
+}
+
+section.login button { 
+    padding: 1rem;
+    border-radius: .2rem;
+    margin: 1rem 0 0;
+    background-color: #267675;
+    color: #fff;
     font-family: var(--primary-font);
-    font-size: 1.2rem;
+    font-size: .8rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
 }
 
-.lockers-grid-container {
+section.login button:hover {
+    background-color: #319190;
+}
+
+/* Table */
+
+.table-wrapper {
     width: 100%;
     background-color: #fafafa;
     border-radius: 12px;
-    box-shadow: inset 0 0 5px #424242;
-    white-space: nowrap;
+/*     white-space: nowrap; */
     overflow-x: auto;
-    overflow-y: auto;
-    display: flex;
 }
 
-.lockers-grid {
-    padding-right: 2rem;
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-template-rows: repeat(5, 1fr);
-}
 
-.grid-item {
-    width: calc(100px / 1.4);
-    height: calc(190px / 1.4);
-    padding: 50% 0;
-    border: 0.1px solid #ffc803;
-    border-radius: 12px;
+table {
+    width: 100%;
+    border: 1px solid #f5f5f5;
+    border-collapse: collapse;
     font-family: var(--primary-font);
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 400;
+}
+
+table td, table th {
+    padding: .9rem 2rem;
+    text-align: left;
+    vertical-align: middle;
+}
+
+table thead th {
     color: #fff;
-    text-align: center;
-    background-image: url("../img/locker.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background: #424242;
 }
 
-.disponivel {
-    background-color: #319190;
+table tr:nth-child(odd) {
+    background: #f5f5f5;
+}
+
+table tr:nth-child(even) {
+    background: #fff;
+}
+
+tr:hover td {
+    background:#bdbdbd;
+    color:#fff;
+}
+
+.table-wrapper button { 
+    padding: .2rem 2rem;
+    border-radius: .2rem;
+    color: #fff;
+    font-family: var(--primary-font);
+    font-size: .8rem;
+    font-weight: 600;
+    outline: none;
     cursor: pointer;
-    transition: all 0.3s ease;
 }
 
-.disponivel:hover {
-    transform: scale(1.04);
-    position: relative;
+.table-wrapper button.alterar {
+    background-color: #267675;
 }
 
-.indisponivel {
-    background-image: url("../img/indisponivel.svg"), url("../img/locker.svg");
-    background-repeat: no-repeat, no-repeat;
-    background-size: 40%, cover;
+.table-wrapper button.alterar:hover {
     background-color: #319190;
-    opacity: 50%;
-    cursor: not-allowed;
 }
 
-.alugado {
+.table-wrapper button.excluir {
+    background-color: #ff4000;
+}
+
+.table-wrapper button.excluir:hover {
+    background-color: #ffb298;
+}
+
+/* Dialog */
+
+dialog {
+    width: 30%;
+    border: none;
+    border-radius: 12px;
+    background-color: #fafafa;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+}
+
+dialog .dialog-div {
+    padding: 2rem 4rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dialog-div h2 {
+    padding: 0 0 1.5rem;
+    font-family: var(--primary-font);
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.dialog-div fieldset * {
+    margin: .2rem;
+}
+
+.dialog-div fieldset {
+    font-family: var(--primary-font);
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog-div input {
+    height: 2.5rem;
+    padding: .2rem .5rem;
+    border: 1px solid #bdbdbd;
+    border-radius: .2rem;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+.dialog-div input:focus {
+    outline-color: #267675;
+}
+
+.dialog-div div {
+    width: 100%;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+}
+
+.dialog-div button {
+    width: 30%;
+    padding: 1rem;
+    border-radius: .2rem;
+    margin-top: 1rem;
+    color: #fff;
+    font-family: var(--primary-font);
+    font-size: .8rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+}
+
+
+dialog button.confirmar {
+    background-color: #267675;
+}
+
+dialog button.confirmar:hover {
     background-color: #319190;
-    opacity: 30%;
-    cursor: not-allowed;
 }
 
+dialog button.close {
+    background-color: #ff4000;
+}
 
-
-
-
+dialog button.close:hover {
+    background-color: #ffb298;
+}

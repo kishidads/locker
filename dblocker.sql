@@ -22,20 +22,20 @@ CREATE TABLE armario (
 CREATE TABLE curso (
 
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    codigo_curso VARCHAR(2) NOT NULL,
+    codigo_curso CHAR(2) NOT NULL,
     nome VARCHAR(50) NOT NULL,
-    duracao INT NOT NULL
+    duracao TINYINT(1) NOT NULL
 
 );
 
 CREATE TABLE funcionario (
 
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    cpf VARCHAR(11) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    senha VARCHAR(20) NOT NULL,
-    nome VARCHAR(20) NOT NULL,
-    sobrenome VARCHAR(50) NOT NULL,
+    cpf CHAR(11) NOT NULL UNIQUE,
+    email VARCHAR(60) NOT NULL UNIQUE,
+    senha VARCHAR(45) NOT NULL,
+    nome VARCHAR(45) NOT NULL,
+    sobrenome VARCHAR(45) NOT NULL,
     funcao VARCHAR(30) NOT NULL,
     privilegio VARCHAR(30) NOT NULL
 
@@ -57,7 +57,7 @@ CREATE TABLE aluno_curso (
 
     id_aluno INT NOT NULL,
     id_curso INT NOT NULL,
-    modulo INT(1) NOT NULL,
+    modulo TINYINT(1) NOT NULL,
     periodo VARCHAR(10),
     situacao_matricula TINYINT(1),
 
@@ -88,26 +88,22 @@ CREATE TABLE telefone_aluno (
 
 );
 
-CREATE TABLE plano (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY
-);
-
-CREATE TABLE locacao (
+CREATE TABLE aluguel (
 
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     plano VARCHAR(9) NOT NULL,
     data_locacao date NOT NULL,
+    situacao_locacao TINYINT(1),
     id_aluno INT NOT NULL,
-    id_armario INT NOT NULL,
-    id_plano INT NOT NULL,
+    id_armario INT NOT NULL
 
     CONSTRAINT fk_locacao_aluno FOREIGN KEY (id_aluno) REFERENCES aluno(id),
     CONSTRAINT fk_locacao_armario FOREIGN KEY (id_armario) REFERENCES armario(id),
-    CONSTRAINT fk_locacao_plano FOREIGN KEY (id_plano) REFERENCES plano(id)
+/*     CONSTRAINT fk_locacao_compartilhamento FOREIGN KEY (id_locacao) REFERENCES compartilhamento(id) */
 
 );
 
-CREATE TABLE compartilhamento (
+/* CREATE TABLE compartilhamento (
 
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -116,7 +112,7 @@ CREATE TABLE compartilhamento (
 
     CONSTRAINT fk_compartilhamento_locacao FOREIGN KEY (id_locacao) REFERENCES locacao(id)
 
-);
+); */
 
 /*
 

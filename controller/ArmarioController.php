@@ -49,10 +49,10 @@ class ArmarioController {
             $armariodao = new ArmarioDAO();
             $armariodao->create($armario, $quantity);
         
-            header('Location: /armarios');
+            header('Location: /listar-armarios');
         }
 
-        include 'view/armarios/cadastro.php';
+        include 'view/armarios/cadastro-armarios.php';
         
     }
 
@@ -70,13 +70,13 @@ class ArmarioController {
             $local = $_POST['local'];
         
             $armariodao = new ArmarioDAO();
-            $armarios = $armariodao->read($local);
+            $armarios = $armariodao->readAll($local);
         
             //echo '<pre>' , var_dump($armarios) , '</pre>';
 
         }
         
-        include 'view/armarios/armarios.php';
+        include 'view/armarios/listar-armarios.php';
         
     }
 

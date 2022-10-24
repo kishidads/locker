@@ -5,9 +5,11 @@
             <?php
             if (isset($_SESSION['authenticate'])) {
                 echo    "<li><p>Olá, {$_SESSION['nome']}</p></li>
-                        <form action='/login' method='POST'>
-                        <li><button type='submit' name='sair'>Sair</button></li>
-                        </form>";
+                        <li>
+                            <form action='/login' method='POST'>
+                                <button type='submit' name='sair'>Sair</button>
+                            </form>
+                        </li>";
             } else {
                 echo    "<li><a href='/login'>Entrar</a></li>
                         <li><a href='/cadastro'>Cadastrar-se</a></li>";

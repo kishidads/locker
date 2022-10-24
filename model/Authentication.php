@@ -4,17 +4,23 @@ class Authentication {
     private $cpf;
     private $senha;
 
-    public function __construct($cpf, $senha) {
-        $this->cpf = $cpf;
-        $this->senha = $senha;
+    public function __construct() {
     }
 
     public function getCpf() {
         return $this->cpf;
     }
 
+    public function getSenha() {
+        return $this->senha;
+    }
+
     public function setCpf($cpf) {
         $this->cpf = $cpf;
+    }
+    
+    public function setSenha($senha) {
+        $this->senha = $senha;
     }
 
     private function checkCredentials($user) {

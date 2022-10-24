@@ -22,7 +22,9 @@ class AuthenticationController {
         
             echo 'Validação:<br><pre>' , var_dump($data) , '</pre>';
             
-            $login = new Authentication($_POST['cpf'], $_POST['senha']);
+            $login = new Authentication();
+            $login->setCpf($_POST['cpf']);
+            $login->setSenha($_POST['senha']);
         
             $authenticationdao = new AuthenticationDAO();
             $data = $authenticationdao->authenticate($login->getCpf());
@@ -43,12 +45,6 @@ class AuthenticationController {
         }
 
         include 'view/aluno/login.php';
-
-    }
-
-    public static function sair() {
-    
-
 
     }
  

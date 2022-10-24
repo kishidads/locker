@@ -7,15 +7,16 @@
     <title>Armários</title>
 
     <link rel="stylesheet" href="public/assets/css/style.css">
+    <link rel="stylesheet" href="public/assets/css/lockers-section.css">
 </head>
 <body>
     <?php include "public/header.php" ?>
     
-    <div class="lockers-section">
+    <section class="lockers">
         <div class="lockers-header">
             <h1>Disponibilidade de Armários</h1>
         </div>
-        <form action="/armarios" method="POST">
+        <form action="/listar-armarios" method="POST">
             <label for="local">Local:</label>
             <select name="local" id="local" required onchange="if(this.value != 0) { this.form.submit(); }">
                 <option value="">--Selecione uma opção--</option>
@@ -48,7 +49,7 @@
                 ?>
             </div>
         </div>
-    </div>
+    </section>
     
     <?php include "public/footer.html" ?>               
     <script src="script.js"></script>

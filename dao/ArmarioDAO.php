@@ -31,7 +31,7 @@ class ArmarioDAO {
         }
     }
 
-    public function read($local) {
+    public function readAll($local) {
 
         try {
             $sql = 'SELECT *
