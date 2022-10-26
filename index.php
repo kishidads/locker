@@ -35,7 +35,15 @@ switch($url) {
     break;
 
     case '/listar-funcionario':
-        //FuncionarioController::listar();
+        FuncionarioController::listar();
+    break;
+
+    case '/alterar-funcionario':
+        FuncionarioController::alterar();
+    break;
+
+    case '/excluir-funcionario':
+        FuncionarioController::excluir();
     break;
 
     case '/cadastro-curso':

@@ -6,6 +6,8 @@ class FuncionarioController {
 
         if (isset($_POST['cadastrar'])) {
 
+            require_once 'session.php';
+
             include_once 'connection/Connection.php';
             include_once 'model/Pessoa.php';
             include_once 'model/Funcionario.php';
@@ -66,22 +68,38 @@ class FuncionarioController {
 
     }
 
-/*     public static function alterar() {
-
+    public static function listar() {
+        
         require_once 'session.php';
-
+        
         include_once 'connection/Connection.php';
         include_once 'model/Pessoa.php';
         include_once 'model/Funcionario.php';
         include_once 'dao/FuncionarioDAO.php';
         include_once 'controller/Filter.php';
-    
+
         $funcionariodao = new FuncionarioDAO();
-        $funcionario = $funcionariodao->read($_SESSION['id']);
+        $funcionarios = $funcionariodao->readAll();
+        
+        //echo '<pre>' , var_dump($funcionarios) , '</pre>';
+
+        include 'view/funcionario/listar-funcionario.php';
+        
+    }
+
+    public static function alterar() {
+
+        require_once 'session.php';
 
         if (isset($_POST['alterar'])) {
 
-            $filter = new Filter();
+            include_once 'connection/Connection.php';
+            include_once 'model/Pessoa.php';
+            include_once 'model/Funcionario.php';
+            include_once 'dao/FuncionarioDAO.php';
+            include_once 'controller/Filter.php';
+                    
+            /*             $filter = new Filter();
         
             $filters = array(
                 'senha' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validatePassword')),  
@@ -102,28 +120,63 @@ class FuncionarioController {
             );
         
             $data = $filter->sanitize($_POST, $filters);
-        
-            echo 'Sanitização:<br><pre>' , var_dump($data) , '</pre>';
+        */
+            $data = $_POST;
+            
+            //echo 'Data:<br><pre>' , var_dump($data) , '</pre>'; 
+            //echo 'Session:<br><pre>' , var_dump($_SESSION) , '</pre>'; 
                
             $funcionario = new Funcionario();
-        
-            $funcionario->setSenha($data['senha']);
+
+            $funcionario->setId($data['id']);
+            $funcionario->setCpf($data['cpf']);
+            $funcionario->setEmail($data['email']);
             $funcionario->setNome($data['nome']);
             $funcionario->setSobrenome($data['sobrenome']);
             $funcionario->setTelefone($data['telefone']);
-            $funcionario->setId($_SESSION['id']);
-        
-            $_SESSION['nome'] = $funcionario->getNome();
-            
+            $funcionario->setFuncao($data['funcao']);
+            $funcionario->setPrivilegio($data['privilegio']);
+                    
             $funcionariodao = new FuncionarioDAO();
-            $funcionariodao->update($funcionario);
-        
-            //header('Location: ../');
+
+           //echo 'Funcionario:<br><pre>' , var_dump($funcionario) , '</pre>';
+           
+           $funcionariodao->update($funcionario);
             
         }
 
-        include_once 'view/funcionario/meu-cadastro.php';
+        header('Location: /listar-funcionario');
         
-    } */
+    }
+
+    public static function excluir() {
+        
+        require_once 'session.php';
+
+        if (isset($_POST['excluir'])) {
+
+            include_once 'connection/Connection.php';
+            include_once 'model/Pessoa.php';
+            include_once 'model/Funcionario.php';
+            include_once 'dao/FuncionarioDAO.php';
+            include_once 'controller/Filter.php';
+
+            $data = $_POST;
+
+            echo '<br><pre>' , var_dump($data) , '</pre>'; 
+
+            $funcionario = new Funcionario();
+            $funcionario->setId($data['id']);
+
+            echo '<br><pre>' , var_dump($funcionario) , '</pre>';
+
+            $funcionariodao = new FuncionarioDAO();
+            $funcionariodao->delete($funcionario);
+
+        }
+
+        header('Location: /listar-funcionario');
+
+    }
 
 }

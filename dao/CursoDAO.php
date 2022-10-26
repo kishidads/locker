@@ -96,6 +96,7 @@ class CursoDAO {
     private function list($row) {
 
         $curso = new Curso();
+
         $curso->setId($row['id']);
         $curso->setCodigoCurso($row['codigo_curso']);
         $curso->setNome($row['nome']);
@@ -124,7 +125,7 @@ class CursoDAO {
 
         } catch (Exception $e) {
 
-            echo 'Erro ao tentar fazer atualizar curso.<br>' . $e . '<br>';
+            echo 'Erro ao tentar atualizar curso.<br>' . $e . '<br>';
 
         }
 

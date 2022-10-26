@@ -78,7 +78,6 @@ class CursoController {
 
         require_once 'session.php';
 
-        
         if (isset($_POST['alterar'])) {
 
             include_once 'connection/Connection.php';
@@ -119,8 +118,8 @@ class CursoController {
             $curso->setNome($data['nome']);
             $curso->setDuracao($data['duracao']);
 
-            
             $cursodao = new CursoDAO();
+
             $cursodao->update($curso);
             
         }
@@ -130,10 +129,10 @@ class CursoController {
     }
 
     public static function excluir() {
+        
+        require_once 'session.php';
 
         if (isset($_POST['excluir'])) {
-
-            require_once 'session.php';
 
             include_once 'connection/Connection.php';
             include_once 'model/Curso.php';

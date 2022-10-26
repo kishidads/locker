@@ -72,7 +72,7 @@ header nav button {
     background-color: #ffc803;
     color: #fff;
     font-family: var(--primary-font);
-    font-size: .8rem;
+    font-size: 1rem;
     font-weight: 600;
     outline: none;
     cursor: pointer;
@@ -83,7 +83,7 @@ header nav button:hover {
 }
 
 main {
-    height: 94vh;
+    min-height: 94vh;
 }
 
 input::-webkit-outer-spin-button,
@@ -98,7 +98,7 @@ input[type='number'] {
 
 section {
     width: 70%;
-    height: 100vh;
+    height: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -275,6 +275,7 @@ section.login button:hover {
 
 .table-wrapper {
     width: 100%;
+    margin-bottom: 2rem;
     background-color: #fafafa;
     border-radius: 12px;
 /*     white-space: nowrap; */
