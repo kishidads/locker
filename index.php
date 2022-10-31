@@ -15,7 +15,11 @@ switch($url) {
     break;
 
     case '/login':
-        AuthenticationController::authentication();
+        AuthenticationController::entrar();
+    break;
+
+    case '/sair':
+        AuthenticationController::sair();
     break;
 
     case '/cadastro':
@@ -23,11 +27,19 @@ switch($url) {
     break;
 
     case '/meu-cadastro':
+        AlunoController::selecionar();
+    break;
+    
+    case '/listar-aluno':
+        AlunoController::listar();
+    break;
+
+    case '/alterar-aluno':
         AlunoController::alterar();
     break;
 
-    case '/listar-aluno':
-        //AlunoController::listar();
+    case '/excluir-aluno':
+        AlunoController::excluir();
     break;
 
     case '/cadastro-funcionario':
@@ -62,12 +74,25 @@ switch($url) {
         CursoController::excluir();
     break;
 
-    case '/cadastro-armarios':
+    case '/cadastro-armario':
         ArmarioController::cadastrar();
     break;
 
-    case '/listar-armarios':
+    case '/listar-armario':
         ArmarioController::listar();
+    break;
+
+    case '/armarios':
+        ArmarioController::listarSelecao();
+    break;
+    
+    case '/alterar-armario':
+        ArmarioController::alterar();
+    break;
+
+
+    case '/excluir-armario':
+        ArmarioController::excluir();
     break;
 
     default:

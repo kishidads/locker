@@ -10,37 +10,44 @@
 </head>
 <body>
     <?php include "public/header.php" ?>
-    <h1>Tela meu cadastro</h1>
-    <fieldset>
-        <legend>Meu cadastro</legend>
-        <form action="/meu-cadastro" method="POST">
 
-            <label for="nome">Nome</label>
-            <input type="text" name="nome" id="nome" value="<?php echo $aluno->getNome() ?>" required>
+    <section class="login">
+        <div class="login-header">
+            <h1>Meu cadastro</h1>
+        </div>
+        <div class="login-wrapper">
+            <form action="/alterar-aluno" method="POST">
+                <fieldset>
+                    <legend>Meu cadastro</legend>
 
-            <label for="sobrenome">Sobrenome</label>
-            <input type="text" name="sobrenome" id="sobrenome" value="<?php echo $aluno->getSobrenome() ?>" required>
+                    <label for="nome">Nome</label>
+                    <input type="text" name="nome" id="nome" value="<?php echo $aluno->getNome() ?>" required>
 
-            <label for="telefone">Telefone</label>
-            <input type="text" name="telefone" id="telefone" value="<?php echo $aluno->getTelefone() ?>" required>
+                    <label for="sobrenome">Sobrenome</label>
+                    <input type="text" name="sobrenome" id="sobrenome" value="<?php echo $aluno->getSobrenome() ?>" required>
 
-            <label for="rm">RM</label>
-            <input type="number" name="rm" id="rm" value="<?php echo $aluno->getRm() ?>" disabled="disabled" required>
+                    <label for="telefone">Telefone</label>
+                    <input type="text" name="telefone" id="telefone" value="<?php echo $aluno->getTelefone() ?>" required>
 
-            <label for="email">E-mail</label>
-            <input type="email" name="email" id="email" value="<?php echo $aluno->getEmail() ?>" disabled="disabled" required>
+                    <label for="rm">RM</label>
+                    <input type="number" name="rm" id="rm" value="<?php echo $aluno->getRm() ?>" disabled="disabled" required>
 
-            <label for="cpf">CPF</label>
-            <input type="text" name="cpf" id="cpf" value="<?php echo $aluno->getCpf() ?>" disabled="disabled" required>
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" id="email" value="<?php echo $aluno->getEmail() ?>" disabled="disabled" required>
 
-            <label for="senha">Senha</label>
-            <input type="password" name="senha" id="senha" value="<?php echo $aluno->getSenha() ?>" required>
-        
-            <button type="submit" name="alterar">Salvar alterações</button>
+                    <label for="cpf">CPF</label>
+                    <input type="text" name="cpf" id="cpf" value="<?php echo $aluno->getCpf() ?>" disabled="disabled" required>
 
-        </form>
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" id="senha" value="<?php echo $aluno->getSenha() ?>" required>
+                
+                    <button type="submit" name="alterar">Salvar alterações</button>
 
-    </fieldset>
+                </fieldset>
+            </form>
+        </div>
+    </section>
+
     <?php include "public/footer.html" ?>
 </body>
 </html>

@@ -72,6 +72,54 @@ class AlunoDAO {
         }
 
     }
+
+    public function readAll() {
+
+        try {
+            $sql = 'SELECT aluno.id, rm, cpf, email, nome, sobrenome, telefone
+            FROM aluno INNER JOIN telefone_aluno telefone
+            ON aluno.id = telefone.id_aluno
+            ORDER BY nome ASC';
+
+            $stmt = Connection::getConnection()->prepare($sql);
+
+            $stmt->execute();
+
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $list = array();
+
+            foreach ($data as $row) {
+
+                $list[] = $this->list($row);
+
+            }
+
+            return $list;
+
+        } catch (Exception $e) {
+
+            echo 'Erro ao selecionar alunos.<br>' . $e . '<br>';
+
+        }
+
+    }
+
+    private function list($row) {
+
+        $aluno = new Aluno();
+
+        $aluno->setId($row['id']);
+        $aluno->setRm($row['rm']);
+        $aluno->setCpf($row['cpf']);
+        $aluno->setEmail($row['email']);
+        $aluno->setNome($row['nome']);
+        $aluno->setSobrenome($row['sobrenome']);
+        $aluno->setTelefone($row['telefone']);
+
+        return $aluno;
+
+    }
      
     public function update(Aluno $aluno) {
 
@@ -102,14 +150,19 @@ class AlunoDAO {
 
     }
 
-/*
-
     public function delete(Aluno $aluno) {
 
         try {
 
-            $sql = 'DELETE FROM aluno WHERE id = :id';
+            $sql = 'START TRANSACTION;
+            DELETE FROM telefone_aluno
+            WHERE id_aluno = :id;
+            DELETE FROM aluno
+            WHERE id = :id;
+            COMMIT;';
+
             $stmt = Connection::getConnection()->prepare($sql);
+            
             $stmt->bindValue(':id', $aluno->getId());
 
             return $stmt->execute();
@@ -121,9 +174,7 @@ class AlunoDAO {
         }
 
     }
-    
-*/
-    
+        
 }
 
 ?>

@@ -12,8 +12,49 @@
     <?php include "public/header.php" ?>
 
     <section class="funcionarios">
-        <div class="funcionarios-header">
+        <div class="section-header">
             <h1>Funcionários</h1>
+            <button class="register-button modal-button">Adicionar</button>
+            <dialog>
+                <div class='dialog-div'>
+                    <h2>Cadastrar</h2>
+                    <form action='/cadastro-funcionario' method='POST'>
+                        <fieldset>
+                            <legend>Adicionar</legend>
+
+                            <label for="nome">Nome</label>
+                            <input type="text" name="nome" id="nome" required>
+
+                            <label for="sobrenome">Sobrenome</label>
+                            <input type="text" name="sobrenome" id="sobrenome" required>
+
+                            <label for="telefone">Telefone</label>
+                            <input type="text" name="telefone" id="telefone" required>
+
+                            <label for="email">E-mail</label>
+                            <input type="email" name="email" id="email" required>
+                            
+                            <label for="cpf">CPF</label>
+                            <input type="text" name="cpf" id="cpf" required>
+                            
+                            <label for="senha">Senha</label>
+                            <input type="password" name="senha" id="senha" required>
+                            
+                            <label for="funcao">Função</label>
+                            <input type="text" name="funcao" id="funcao" required>
+
+                            <label for="privilegio">Privilégio</label>
+                            <input type="text" name="privilegio" id="privilegio" required>
+
+                            <div>
+                                <button class='confirmar' type='submit' name='cadastrar'>Confirmar</button>
+                                <button class='close'>Cancelar</button>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </dialog>
         </div>
         <div class="table-wrapper">
             <table>

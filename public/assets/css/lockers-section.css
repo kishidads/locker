@@ -1,17 +1,37 @@
 .lockers form {
     font-family: var(--primary-font);
     font-size: 1.4rem;
-    align-self: flex-end;
+    grid-area: right;
+    justify-self: right;
+}
+
+.lockers form label {
+    display: none;
 }
 
 .lockers select {
+    padding: .6rem;
+    border-radius: 1.5rem;
+    margin: 2rem 1rem 1rem;
+    background-color: #ffc803;
+    color: #fff;
     font-family: var(--primary-font);
-    font-size: 1.2rem;
+    font-size: .9rem;
+    font-weight: 600;
+    outline: none;
+}
+
+.lockers select option {
+    background-color: #fafafa;
+    color: #424242;
+    font-family: var(--primary-font);
+    font-weight: 400;
+    outline: none;
 }
 
 .lockers-grid-container {
     width: 100%;
-    height: 77%;
+
     background-color: #fafafa;
     border-radius: 12px;
     box-shadow: inset 0 0 5px rgb(0 0 0/.1);

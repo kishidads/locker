@@ -13,19 +13,22 @@
     <?php include "public/header.php" ?>
     
     <section class="lockers">
-        <div class="lockers-header">
-            <h1>Disponibilidade de Armários</h1>
+        <div class="section-header">
+            <h1>Armários</h1>
+            <form action="/armarios" method="POST">
+
+                <label for="local">Local</label>
+
+                <select name="local" id="local" required onchange="if(this.value != 0) { this.form.submit(); }">
+                    <option value="">--Selecione uma localização--</option>
+                    <option value="administracao">Corredor Administração</option>
+                    <option value="quimica">Corredor Química</option>
+                    <option value="nutricao">Corredor Nutrição</option>
+                </select>
+                <input type='hidden' name='listar' value='listar'>
+
+            </form>
         </div>
-        <form action="/listar-armarios" method="POST">
-            <label for="local">Local:</label>
-            <select name="local" id="local" required onchange="if(this.value != 0) { this.form.submit(); }">
-                <option value="">--Selecione uma opção--</option>
-                <option value="administracao">Corredor Administração</option>
-                <option value="quimica">Corredor Química</option>
-                <option value="nutricao">Corredor Nutrição</option>
-            </select>
-            <input type='hidden' name='listar' value='listar'>
-        </form>
         <div class="lockers-grid-container">
             <div class="lockers-grid">
                 <?php

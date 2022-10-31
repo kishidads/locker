@@ -111,7 +111,8 @@ class CursoDAO {
 
         try {
 
-            $sql = 'UPDATE curso SET codigo_curso = :codigo_curso, nome = :nome, duracao = :duracao
+            $sql = 'UPDATE curso
+            SET codigo_curso = :codigo_curso, nome = :nome, duracao = :duracao
             WHERE id = :id;';
 
             $stmt = Connection::getConnection()->prepare($sql);

@@ -4,7 +4,7 @@ class ArmarioDAO {
     
     public function create(Armario $armario, $quantity) {
 
-        //echo '<pre>' , var_dump($armario) , '</pre>';
+        echo '<pre>' , var_dump($armario) , '</pre>';
     
         for ($i = 1; $i <= $quantity; $i++) {
             try {
@@ -31,7 +31,7 @@ class ArmarioDAO {
         }
     }
 
-    public function readAll($local) {
+    public function readSelection($local) {
 
         try {
             $sql = 'SELECT *
@@ -42,6 +42,38 @@ class ArmarioDAO {
             $stmt = Connection::getConnection()->prepare($sql);
 
             $stmt->bindValue(':local', $local);
+            $stmt->execute();
+
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $list = array();
+
+            foreach ($data as $row) {
+
+                $list[] = $this->list($row);
+
+            }
+
+
+            return $list;
+
+        } catch (Exception $e) {
+
+            echo 'Erro ao selecionar armários.<br>' . $e . '<br>';
+
+        }
+
+    }
+
+    public function readAll() {
+
+        try {
+            $sql = 'SELECT *
+            FROM armario
+            ORDER BY secao, numero ASC';
+
+            $stmt = Connection::getConnection()->prepare($sql);
+
             $stmt->execute();
 
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -79,61 +111,54 @@ class ArmarioDAO {
 
     }
 
-/*
-
-    public function update(Aluno $aluno) {
+    public function update(Armario $armario) {
 
         try {
 
-            $sql = 'START TRANSACTION;
-            UPDATE aluno SET senha = :senha, nome = :nome, sobrenome = :sobrenome
-            WHERE id = :id;
-            UPDATE telefone_aluno SET telefone = :telefone
-            WHERE id_aluno = :id;
-            COMMIT;';
+            $sql = 'UPDATE armario
+            SET secao = :secao, numero = :numero, local = :local, andar = :andar, situacao = :situacao
+            WHERE id = :id;';
 
             $stmt = Connection::getConnection()->prepare($sql);
 
-            $stmt->bindValue(':senha', $aluno->getSenha(), PDO::PARAM_STR);
-            $stmt->bindValue(':nome', $aluno->getNome(), PDO::PARAM_STR);
-            $stmt->bindValue(':sobrenome', $aluno->getSobrenome(), PDO::PARAM_STR);
-            $stmt->bindValue(':telefone', $aluno->getTelefone(), PDO::PARAM_STR);
-            $stmt->bindValue(':id', $_SESSION['id'], PDO::PARAM_INT);
+            $stmt->bindValue(':secao', $armario->getSecao(), PDO::PARAM_STR);
+            $stmt->bindValue(':numero', $armario->getNumero(), PDO::PARAM_INT);
+            $stmt->bindValue(':local', $armario->getLocal(), PDO::PARAM_STR);
+            $stmt->bindValue(':andar', $armario->getAndar(), PDO::PARAM_INT);
+            $stmt->bindValue(':situacao', $armario->getSituacao(), PDO::PARAM_STR);
+            $stmt->bindValue(':id', $armario->getId(), PDO::PARAM_INT);
 
             return $stmt->execute();
 
         } catch (Exception $e) {
 
-            echo 'Erro ao tentar fazer atualizar aluno.<br>' . $e . '<br>';
+            echo 'Erro ao tentar atualizar armário.<br>' . $e . '<br>';
 
         }
 
     }
-    
-*/
 
-/*
-
-    public function delete(Aluno $aluno) {
+    public function delete(Armario $armario) {
 
         try {
 
-            $sql = 'DELETE FROM aluno WHERE id = :id';
+            $sql = 'DELETE FROM armario
+            WHERE id = :id';
+
             $stmt = Connection::getConnection()->prepare($sql);
-            $stmt->bindValue(':id', $aluno->getId());
+
+            $stmt->bindValue(':id', $armario->getId());
 
             return $stmt->execute();
 
         } catch (Exception $e) {
 
-            echo 'Erro ao tentar excluir aluno.<br>' . $e . '<br>';
+            echo 'Erro ao tentar excluir armário.<br>' . $e . '<br>';
 
         }
 
     }
-    
-*/
-    
+        
 }
 
 ?>

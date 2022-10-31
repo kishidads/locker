@@ -3,17 +3,17 @@
 class ArmarioController {
 
     public static function cadastrar() {
+        
+        require_once 'session.php';
 
         if (isset($_POST['cadastrar'])) {
-
-            require_once 'session.php';
 
             include_once 'connection/Connection.php';
             include_once 'model/Armario.php';
             include_once 'dao/ArmarioDAO.php';
             include_once 'controller/Filter.php';
     
-            $filter = new Filter();
+/*             $filter = new Filter();
         
             $filters = array(
                 'secao' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validateSecao')), 
@@ -33,9 +33,11 @@ class ArmarioController {
                 'quantidade' => FILTER_SANITIZE_NUMBER_INT
             );
         
-            $data = $filter->sanitize($_POST, $filters);
+            $data = $filter->sanitize($_POST, $filters); */
         
-            //echo 'Sanitização:<br><pre>' , var_dump($_POST) , '</pre>'; 
+            echo 'Sanitização:<br><pre>' , var_dump($_POST) , '</pre>';
+
+            $data = $_POST;
         
             $armario = new Armario();
         
@@ -43,20 +45,37 @@ class ArmarioController {
             $armario->setLocal($data['local']);
             $armario->setAndar($data['andar']);
             $armario->setSituacao($data['situacao']);
-        
-            $quantity = $_POST['quantidade'];
-            
+                   
             $armariodao = new ArmarioDAO();
-            $armariodao->create($armario, $quantity);
+            
+            $armariodao->create($armario, $data['quantidade']);
         
-            header('Location: /listar-armarios');
         }
-
-        include 'view/armarios/cadastro-armarios.php';
+        
+        header('Location: /listar-armario');
         
     }
 
     public static function listar() {
+        
+        require_once 'session.php';
+        
+        include_once 'connection/Connection.php';
+        include_once 'model/Armario.php';
+        include_once 'dao/ArmarioDAO.php';
+        include_once 'controller/Filter.php';
+
+        $armariodao = new ArmarioDAO();
+
+        $armarios = $armariodao->readAll();
+        
+        //echo '<pre>' , var_dump($armarios) , '</pre>';
+       
+        include 'view/armarios/listar-armario.php';
+        
+    }
+
+    public static function listarSelecao() {
         
         require_once 'session.php';
         
@@ -70,14 +89,98 @@ class ArmarioController {
             $local = $_POST['local'];
         
             $armariodao = new ArmarioDAO();
-            $armarios = $armariodao->readAll($local);
+            
+            $armarios = $armariodao->readSelection($local);
         
             //echo '<pre>' , var_dump($armarios) , '</pre>';
 
         }
         
-        include 'view/armarios/listar-armarios.php';
+        include 'view/armarios/armarios.php';
         
+    }
+
+    public static function alterar() {
+
+        require_once 'session.php';
+
+        if (isset($_POST['alterar'])) {
+
+            include_once 'connection/Connection.php';
+            include_once 'model/Armario.php';
+            include_once 'dao/ArmarioDAO.php';
+            include_once 'controller/Filter.php';
+            
+ /*         $filter = new Filter();
+        
+            $filters = array(
+                'senha' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validatePassword')),  
+                'nome' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validateName')),
+                'sobrenome' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validateName')),
+                'telefone' => array('filter' => FILTER_CALLBACK, 'options' => array($filter, 'validatePhone'))
+            );
+        
+            $data = $filter->validate($_POST, $filters);
+        
+            echo 'Validação:<br><pre>' , var_dump($data) , '</pre>';
+        
+            $filters = array(
+                'senha' => FILTER_UNSAFE_RAW,  
+                'nome' => FILTER_SANITIZE_SPECIAL_CHARS,
+                'sobrenome' => FILTER_SANITIZE_SPECIAL_CHARS,
+                'telefone' => FILTER_UNSAFE_RAW
+            );
+        
+            $data = $filter->sanitize($_POST, $filters); */
+
+            $data = $_POST;
+        
+            //echo 'Sanitização:<br><pre>' , var_dump($data) , '</pre>';
+               
+            $armario = new Armario();
+        
+            $armario->setId($data['id']);
+            $armario->setSecao($data['secao']);
+            $armario->setNumero($data['numero']);
+            $armario->setLocal($data['local']);
+            $armario->setAndar($data['andar']);
+            $armario->setSituacao($data['situacao']);
+
+            $armariodao = new ArmarioDAO();
+
+            $armariodao->update($armario);
+            
+        }
+        
+        header('Location: /listar-armario');
+
+    }
+
+    public static function excluir() {
+        
+        require_once 'session.php';
+
+        if (isset($_POST['excluir'])) {
+
+            include_once 'connection/Connection.php';
+            include_once 'model/Armario.php';
+            include_once 'dao/ArmarioDAO.php';
+            include_once 'controller/Filter.php';
+
+            $data = $_POST;
+
+            $armario = new Armario();
+
+            $armario->setId($data['id']);
+
+            $armariodao = new ArmarioDAO();
+
+            $armariodao->delete($armario);
+
+        }
+
+        header('Location: /listar-armario');
+
     }
 
 }

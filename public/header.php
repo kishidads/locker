@@ -6,7 +6,7 @@
             if (isset($_SESSION['authenticate'])) {
                 echo    "<li><p>Olá, {$_SESSION['nome']}</p></li>
                         <li>
-                            <form action='/login' method='POST'>
+                            <form action='/sair' method='POST'>
                                 <button type='submit' name='sair'>Sair</button>
                             </form>
                         </li>";

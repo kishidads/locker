@@ -4,9 +4,9 @@ class FuncionarioController {
 
     public static function cadastrar() {
 
-        if (isset($_POST['cadastrar'])) {
+        require_once 'session.php';
 
-            require_once 'session.php';
+        if (isset($_POST['cadastrar'])) {
 
             include_once 'connection/Connection.php';
             include_once 'model/Pessoa.php';
@@ -60,11 +60,12 @@ class FuncionarioController {
             $funcionario->setPrivilegio($data['privilegio']);
             
             $funcionariodao = new FuncionarioDAO();
+            
             $funcionariodao->create($funcionario);
         
         }
         
-        include_once 'view/funcionario/cadastro-funcionario.php';
+        header('Location: /listar-funcionario');
 
     }
 
@@ -79,6 +80,7 @@ class FuncionarioController {
         include_once 'controller/Filter.php';
 
         $funcionariodao = new FuncionarioDAO();
+
         $funcionarios = $funcionariodao->readAll();
         
         //echo '<pre>' , var_dump($funcionarios) , '</pre>';
@@ -141,7 +143,7 @@ class FuncionarioController {
 
            //echo 'Funcionario:<br><pre>' , var_dump($funcionario) , '</pre>';
            
-           $funcionariodao->update($funcionario);
+            $funcionariodao->update($funcionario);
             
         }
 
@@ -163,14 +165,16 @@ class FuncionarioController {
 
             $data = $_POST;
 
-            echo '<br><pre>' , var_dump($data) , '</pre>'; 
+            //echo '<br><pre>' , var_dump($data) , '</pre>'; 
 
             $funcionario = new Funcionario();
+
             $funcionario->setId($data['id']);
 
-            echo '<br><pre>' , var_dump($funcionario) , '</pre>';
+            //echo '<br><pre>' , var_dump($funcionario) , '</pre>';
 
             $funcionariodao = new FuncionarioDAO();
+
             $funcionariodao->delete($funcionario);
 
         }

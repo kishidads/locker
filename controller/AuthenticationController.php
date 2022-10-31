@@ -2,7 +2,7 @@
 
 class AuthenticationController {
 
-    public static function authentication() {
+    public static function entrar() {
 
         if (isset($_POST['entrar'])) {
 
@@ -20,13 +20,15 @@ class AuthenticationController {
         
             $data = $filter->validate($_POST, $filters);
         
-            echo 'Validação:<br><pre>' , var_dump($data) , '</pre>';
+            //echo 'Validação:<br><pre>' , var_dump($data) , '</pre>';
             
             $login = new Authentication();
+
             $login->setCpf($_POST['cpf']);
             $login->setSenha($_POST['senha']);
         
             $authenticationdao = new AuthenticationDAO();
+
             $data = $authenticationdao->authenticate($login->getCpf());
             
             if ($login->login($data)) {         
@@ -35,16 +37,21 @@ class AuthenticationController {
         
         }
 
+        include 'view/aluno/login.php';
+
+    }
+
+    public static function sair() {
+
         if (isset($_POST['sair'])) {
         
             include_once 'model/Authentication.php';
             
             $logout = new Authentication();
+
             $logout->logout();
         
         }
-
-        include 'view/aluno/login.php';
 
     }
  

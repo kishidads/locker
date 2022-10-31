@@ -3,10 +3,10 @@
 class CursoController {
 
     public static function cadastrar() {
+        
+        require_once 'session.php';
 
         if (isset($_POST['cadastrar'])) {
-
-            require_once 'session.php';
 
             include_once 'connection/Connection.php';
             include_once 'model/Curso.php';
@@ -41,18 +41,17 @@ class CursoController {
 
             $curso = new Curso();
         
-            $curso->setCodigoCurso($data['codigoCurso']);
+            $curso->setCodigoCurso($data['codigo_curso']);
             $curso->setNome($data['nome']);
             $curso->setDuracao($data['duracao']);
             
             $cursodao = new CursoDAO();
+
             $cursodao->create($curso);
         
-            header('Location: /listar-curso');
-
         }
-
-        include 'view/curso/cadastro-curso.php';
+        
+        header('Location: /listar-curso');
         
     }
 
@@ -66,6 +65,7 @@ class CursoController {
         include_once 'controller/Filter.php';
 
         $cursodao = new CursoDAO();
+        
         $cursos = $cursodao->readAll();
         
         //echo '<pre>' , var_dump($cursos) , '</pre>';
@@ -142,9 +142,11 @@ class CursoController {
             $data = $_POST;
 
             $curso = new Curso();
+
             $curso->setId($data['id']);
 
             $cursodao = new CursoDAO();
+            
             $cursodao->delete($curso);
 
         }

@@ -61,20 +61,60 @@ class AlunoController {
 
     }
 
-    public static function alterar() {
+    public static function selecionar() {
 
         require_once 'session.php';
-
+        
         include_once 'connection/Connection.php';
         include_once 'model/Pessoa.php';
         include_once 'model/Aluno.php';
         include_once 'dao/AlunoDAO.php';
         include_once 'controller/Filter.php';
-    
-        $alunodao = new AlunoDAO();
-        $aluno = $alunodao->read($_SESSION['id']);
 
+        $aluno = new Aluno();
+
+        $aluno->setId($_SESSION['id']);
+
+        $alunodao = new AlunoDAO();
+        $aluno = $alunodao->read($aluno->getId());
+        
+        //echo '<pre>' , var_dump($alunos) , '</pre>';
+
+        include 'view/aluno/meu-cadastro.php';
+
+    }
+
+    public static function listar() {
+        
+        require_once 'session.php';
+        
+        include_once 'connection/Connection.php';
+        include_once 'model/Pessoa.php';
+        include_once 'model/Aluno.php';
+        include_once 'dao/AlunoDAO.php';
+        include_once 'controller/Filter.php';
+
+        $alunodao = new AlunoDAO();
+
+        $alunos = $alunodao->readAll();
+        
+        //echo '<pre>' , var_dump($alunos) , '</pre>';
+
+        include 'view/aluno/listar-aluno.php';
+        
+    }
+
+    public static function alterar() {
+
+        require_once 'session.php';
+    
         if (isset($_POST['alterar'])) {
+
+            include_once 'connection/Connection.php';
+            include_once 'model/Pessoa.php';
+            include_once 'model/Aluno.php';
+            include_once 'dao/AlunoDAO.php';
+            include_once 'controller/Filter.php';
 
             $filter = new Filter();
         
@@ -106,19 +146,52 @@ class AlunoController {
             $aluno->setNome($data['nome']);
             $aluno->setSobrenome($data['sobrenome']);
             $aluno->setTelefone($data['telefone']);
-            $aluno->setId($_SESSION['id']);
-        
-            $_SESSION['nome'] = $aluno->getNome();
-            
+
+            if (isset($_SESSION['authenticate'])) {
+                $aluno->setId($_SESSION['id']);
+            } else {
+                $aluno->setId($data['id']);
+            }
+                    
             $alunodao = new AlunoDAO();
+
             $alunodao->update($aluno);
-        
-            //header('Location: ../');
             
         }
-
-        include_once 'view/aluno/meu-cadastro.php';
         
+        header('Location: /meu-cadastro');
+
+    }
+
+    public static function excluir() {
+        
+        require_once 'session.php';
+
+        if (isset($_POST['excluir'])) {
+
+            include_once 'connection/Connection.php';
+            include_once 'model/Pessoa.php';
+            include_once 'model/Aluno.php';
+            include_once 'dao/AlunoDAO.php';
+            include_once 'controller/Filter.php';
+
+            $data = $_POST;
+
+            echo '<br><pre>' , var_dump($data) , '</pre>'; 
+
+            $aluno = new Aluno();
+            $aluno->setId($data['id']);
+
+            echo '<br><pre>' , var_dump($aluno) , '</pre>';
+
+            $alunodao = new AlunoDAO();
+
+            $alunodao->delete($aluno);
+
+        }
+
+        header('Location: /listar-aluno');
+
     }
 
 }

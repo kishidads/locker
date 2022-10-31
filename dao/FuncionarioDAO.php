@@ -77,7 +77,7 @@ class FuncionarioDAO {
     public function readAll() {
 
         try {
-            $sql = 'SELECT funcionario.id, cpf, email, senha, nome, sobrenome, funcao, privilegio, telefone
+            $sql = 'SELECT funcionario.id, cpf, email, nome, sobrenome, funcao, privilegio, telefone
             FROM funcionario INNER JOIN telefone_funcionario telefone
             ON funcionario.id = telefone.id_funcionario
             ORDER BY nome ASC';
@@ -113,7 +113,6 @@ class FuncionarioDAO {
         $funcionario->setId($row['id']);
         $funcionario->setCpf($row['cpf']);
         $funcionario->setEmail($row['email']);
-        $funcionario->setSenha($row['senha']);
         $funcionario->setNome($row['nome']);
         $funcionario->setSobrenome($row['sobrenome']);
         $funcionario->setFuncao($row['funcao']);
