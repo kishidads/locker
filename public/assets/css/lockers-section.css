@@ -86,3 +86,32 @@
     opacity: 50%;
     cursor: not-allowed;
 }
+
+.selected {
+    background-color: #424242;
+}
+
+.selected:hover {
+    background-color: #424242;
+}
+
+.reserve-form {
+    margin: auto 1rem;
+    align-self: flex-end;
+}
+
+.reserve-form > button {
+    padding: .5rem 2rem;
+    border-radius: 1.5rem;
+    background-color: #ffc803;
+    color: #fff;
+    font-family: var(--primary-font);
+    font-size: 1rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+}
+
+.reserve-form > button:hover {
+    background-color: #fdd954;
+}
