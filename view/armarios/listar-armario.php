@@ -27,26 +27,66 @@
 
                             <label for="quantidade">Quantidade</label>
                             <input type="number" name="quantidade" id="quantidade" min="1" max="20" value="20" required>
+                                
+                            <label for="local">Local</label>
+                            <input list="locais" id="local" name="local">
+                            <datalist id="locais" required>
+                                <?php
+                                if ($locais) {
+                                    foreach ($locais as $local) {
+                                        $dom = new DOMDocument();
 
-                            <label for="local">Proximidade</label>
-                            <select name="local" id="local" required>
-                                <option value="administracao">Corredor Administração</option>
-                                <option value="quimica">Corredor Química</option>
-                                <option value="nutricao">Corredor Nutrição</option>
-                            </select>
+                                        $option = $dom->createElement("option", "{$local->getLocal()}");
+
+                                        $option->setAttribute("value", "{$local->getLocal()}");
+
+                                        $dom->appendChild($option);
+
+                                        echo "{$dom->saveHTML()}";
+                                    }
+                                }
+                                ?>
+                            </datalist>
                             
                             <label for="andar">Andar</label>
-                            <select name="andar" id="andar" required>
-                                <option value=0>Inferior</option>
-                                <option value=1>Superior</option>
-                            </select>
+                            <input list="andares" id="andar" name="andar">
+                            <datalist id="andares" required>
+                                <?php
+                                if ($andares) {
+                                    foreach ($andares as $andar) {
+                                        $dom = new DOMDocument();
 
+                                        $option = $dom->createElement("option", "{$andar->getAndar()}");
+
+                                        $option->setAttribute("value", "{$andar->getAndar()}");
+
+                                        $dom->appendChild($option);
+
+                                        echo "{$dom->saveHTML()}";
+                                    }
+                                }
+                                ?>
+                            </datalist>
+                            
                             <label for="situacao">Situação</label>
-                            <select name="situacao" id="situacao" required>
-                                <option value="disponivel">Disponível</option>
-                                <option value="indisponivel">Indisponível</option>
-                                <option value="alugado">Alugado</option>
-                            </select>
+                            <input list="situacoes" id="situacao" name="situacao">
+                            <datalist id="situacoes" required>
+                                <?php
+                                if ($situacoes) {
+                                    foreach ($situacoes as $situacao) {
+                                        $dom = new DOMDocument();
+
+                                        $option = $dom->createElement("option", "{$situacao->getSituacao()}");
+
+                                        $option->setAttribute("value", "{$situacao->getSituacao()}");
+
+                                        $dom->appendChild($option);
+
+                                        echo "{$dom->saveHTML()}";
+                                    }
+                                }
+                                ?>
+                            </datalist>
 
                             <div>
                                 <button class='confirmar' type='submit' name='cadastrar'>Confirmar</button>

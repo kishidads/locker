@@ -8,7 +8,7 @@
     --action-font: ; */
 }
 
-* :not(dialog) {
+*:not(dialog) {
     padding: 0;
     border: none;
     margin: 0;
@@ -223,11 +223,8 @@ legend {
     display: none;
 }
 
-section.login form * {
-    margin: .2rem;
-}
-
 section.login fieldset {
+    margin: .2rem;
     font-family: var(--primary-font);
     font-size: 1rem;
     display: flex;
@@ -237,10 +234,15 @@ section.login fieldset {
 section.login input {
     height: 2.5rem;
     padding: .2rem .5rem;
+    margin: .2rem 0;
     border: 1px solid #bdbdbd;
     border-radius: .2rem;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 400;
+}
+
+section.login fieldset > label {
+    margin: .2rem 0;
 }
 
 section.login input:focus {
@@ -250,7 +252,7 @@ section.login input:focus {
 section.login button { 
     padding: 1rem;
     border-radius: .2rem;
-    margin: 1rem 0 0;
+    margin: 1.2rem 0 0;
     background-color: #267675;
     color: #fff;
     font-family: var(--primary-font);
@@ -463,4 +465,55 @@ dialog button.close {
 
 dialog button.close:hover {
     background-color: #ffb298;
+}
+
+/* Checkout */
+.planos {
+    width: 100%;
+}
+
+.plano {
+    margin: .5rem 0;
+    border: 1px solid #dcd0e0;
+    border-radius: 12px;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+}
+
+/* .plano:focus-within {
+    color: #fff;
+    background-color: #267675;
+} */
+
+.plano input[type="radio"] {
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.plano label {
+    padding: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.plano input[type="radio"]:checked ~ label {
+    background-color: #267675;
+    color: #fff;
+}
+
+.plano label:nth-child(even) {
+    width: 60%;
+    padding-left: 2rem;
+    border-radius: 12px 0 0 12px;
+}
+
+.plano label:nth-child(odd) {
+    width: 40%;
+    padding-right: 2rem;
+    border-radius: 0 12px 12px 0;
+    text-align: end;
 }

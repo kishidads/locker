@@ -8,6 +8,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 if (!isset($_SESSION['authenticate'])) {
     header('Location: /');
+    die();
 }
 
 ?>

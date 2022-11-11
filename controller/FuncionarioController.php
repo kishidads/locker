@@ -66,6 +66,7 @@ class FuncionarioController {
         }
         
         header('Location: /listar-funcionario');
+        die();
 
     }
 
@@ -148,6 +149,7 @@ class FuncionarioController {
         }
 
         header('Location: /listar-funcionario');
+        die();
         
     }
 
@@ -180,6 +182,7 @@ class FuncionarioController {
         }
 
         header('Location: /listar-funcionario');
+        die();
 
     }
 

@@ -63,7 +63,7 @@ class CursandoController {
             $cursandodao = new CursandoDAO();
             $cursandodao->create($cursando);
         
-            //header('Location: /listar-cursandos');
+            //header('Location: /listar-cursandos'); die();
         }
 
         include 'view/cursando/cadastro-cursando.php';

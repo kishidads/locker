@@ -7,6 +7,7 @@ class ArmarioDAO {
         echo '<pre>' , var_dump($armario) , '</pre>';
     
         for ($i = 1; $i <= $quantity; $i++) {
+            
             try {
                 
                 $sql =
@@ -18,7 +19,7 @@ class ArmarioDAO {
                 $stmt->bindValue(':secao', $armario->getSecao(), PDO::PARAM_STR);
                 $stmt->bindValue(':numero', $i, PDO::PARAM_INT);
                 $stmt->bindValue(':local', $armario->getLocal(), PDO::PARAM_STR);
-                $stmt->bindValue(':andar', $armario->getAndar(), PDO::PARAM_INT);
+                $stmt->bindValue(':andar', $armario->getAndar(), PDO::PARAM_STR);
                 $stmt->bindValue(':situacao', $armario->getSituacao(), PDO::PARAM_STR);
 
                 $stmt->execute();
@@ -31,35 +32,39 @@ class ArmarioDAO {
         }
     }
 
-    public function readSelection($local) {
+    public function read($id, $secao, $numero) {
 
         try {
+
             $sql = 'SELECT *
             FROM armario
-            WHERE local = :local
-            ORDER BY secao, numero ASC';
+            WHERE (id = :id) OR (secao = :secao AND numero = :numero)
+            LIMIT 1';
 
             $stmt = Connection::getConnection()->prepare($sql);
 
-            $stmt->bindValue(':local', $local);
+            $stmt->bindValue(':id', $id);
+            $stmt->bindValue(':secao', $secao);
+            $stmt->bindValue(':numero', $numero);
+
             $stmt->execute();
 
-            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $list = array();
+            $armario = new Armario();
 
-            foreach ($data as $row) {
-
-                $list[] = $this->list($row);
-
-            }
-
-
-            return $list;
+            $armario->setId($data['id']);
+            $armario->setSecao($data['secao']);
+            $armario->setNumero($data['numero']);
+            $armario->setLocal($data['local']);
+            $armario->setAndar($data['andar']);
+            $armario->setSituacao($data['situacao']);
+            
+            return $armario;
 
         } catch (Exception $e) {
 
-            echo 'Erro ao selecionar armários.<br>' . $e . '<br>';
+            echo 'Erro ao selecionar armario.<br>' . $e . '<br>';
 
         }
 
@@ -68,6 +73,7 @@ class ArmarioDAO {
     public function readAll() {
 
         try {
+
             $sql = 'SELECT *
             FROM armario
             ORDER BY secao, numero ASC';
@@ -97,9 +103,135 @@ class ArmarioDAO {
 
     }
 
+    public function readSelection($local) {
+
+        try {
+
+            $sql = 'SELECT *
+            FROM armario
+            WHERE local = :local
+            ORDER BY secao, numero ASC';
+
+            $stmt = Connection::getConnection()->prepare($sql);
+
+            $stmt->bindValue(':local', $local);
+
+            $stmt->execute();
+
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $list = array();
+
+            foreach ($data as $row) {
+
+                $list[] = $this->list($row);
+
+            }
+
+            return $list;
+
+        } catch (Exception $e) {
+
+            echo 'Erro ao selecionar armários.<br>' . $e . '<br>';
+
+        }
+
+    }
+
+    public function readLocal() {
+
+        try {
+
+            $sql = 'SELECT * FROM armario GROUP BY local ORDER BY local ASC';
+
+            $stmt = Connection::getConnection()->prepare($sql);
+
+            $stmt->execute();
+
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $list = array();
+
+            foreach ($data as $row) {
+
+                $list[] = $this->list($row);
+
+            }
+
+            return $list;
+
+        } catch (Exception $e) {
+
+            echo 'Erro ao selecionar locais de armários.<br>' . $e . '<br>';
+
+        }
+
+    }
+
+    public function readFloor() {
+
+        try {
+
+            $sql = 'SELECT * FROM armario GROUP BY andar ORDER BY andar ASC';
+
+            $stmt = Connection::getConnection()->prepare($sql);
+
+            $stmt->execute();
+
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $list = array();
+
+            foreach ($data as $row) {
+
+                $list[] = $this->list($row);
+
+            }
+
+            return $list;
+
+        } catch (Exception $e) {
+
+            echo 'Erro ao selecionar andares de armários.<br>' . $e . '<br>';
+
+        }
+
+    }
+
+    public function readSituation() {
+
+        try {
+
+            $sql = 'SELECT * FROM armario GROUP BY situacao ORDER BY situacao ASC';
+
+            $stmt = Connection::getConnection()->prepare($sql);
+
+            $stmt->execute();
+
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $list = array();
+
+            foreach ($data as $row) {
+
+                $list[] = $this->list($row);
+
+            }
+
+            return $list;
+
+        } catch (Exception $e) {
+
+            echo 'Erro ao selecionar situação de armários.<br>' . $e . '<br>';
+
+        }
+
+    }
+
     private function list($row) {
 
         $armario = new Armario();
+
         $armario->setId($row['id']);
         $armario->setSecao($row['secao']);
         $armario->setNumero($row['numero']);
@@ -117,14 +249,14 @@ class ArmarioDAO {
 
             $sql = 'UPDATE armario
             SET secao = :secao, numero = :numero, local = :local, andar = :andar, situacao = :situacao
-            WHERE id = :id;';
+            WHERE id = :id';
 
             $stmt = Connection::getConnection()->prepare($sql);
 
             $stmt->bindValue(':secao', $armario->getSecao(), PDO::PARAM_STR);
             $stmt->bindValue(':numero', $armario->getNumero(), PDO::PARAM_INT);
             $stmt->bindValue(':local', $armario->getLocal(), PDO::PARAM_STR);
-            $stmt->bindValue(':andar', $armario->getAndar(), PDO::PARAM_INT);
+            $stmt->bindValue(':andar', $armario->getAndar(), PDO::PARAM_STR);
             $stmt->bindValue(':situacao', $armario->getSituacao(), PDO::PARAM_STR);
             $stmt->bindValue(':id', $armario->getId(), PDO::PARAM_INT);
 

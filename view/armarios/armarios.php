@@ -16,24 +16,36 @@
         <div class="section-header">
             <h1>Armários</h1>
 
-            <form action="/armarios" method="POST">
+            <form action="/armarios" method="GET">
                 <label for="local">Local</label>
 
                 <select name="local" id="local" required onchange="if(this.value != 0) { this.form.submit(); }">
                     <option value="">--Selecione uma localização--</option>
-                    <option value="administracao">Corredor Administração</option>
-                    <option value="quimica">Corredor Química</option>
-                    <option value="nutricao">Corredor Nutrição</option>
+                    <?php
+                    if ($locais) {
+                        foreach ($locais as $local) {
+                            $dom = new DOMDocument();
+
+                            $option = $dom->createElement("option", "{$local->getLocal()}");
+
+                            $option->setAttribute("value", "{$local->getLocal()}");
+
+                            $dom->appendChild($option);
+
+                            echo "{$dom->saveHTML()}";
+                        }
+                    }
+                    ?>
                 </select>
 
-                <input type='hidden' name='listar' value='listar'>
+                <input type='hidden' name='listar' value='listar' require>
             </form>
         </div>
 
         <div class="lockers-grid-container">
             <div class="lockers-grid">
                 <?php
-                if (isset($_POST['listar']) && $armarios) {
+                if (isset($_GET['listar']) && $armarios) {
                     
                     $secao = $armarios[0]->getSecao();
 
@@ -60,17 +72,22 @@
             </div>
         </div>
 
-        <form class="reserve-form" action="/checkout" method="GET">
-            <input class="reserve" type="hidden">
-            <button>Avançar</button>
+        <form class="reserve-form" action="/checkout" method="POST">
+            <input id="reserve" type="hidden" name="selecionado">
+            <button id="button" name="avancar">Avançar</button>
         </form>
     </section>
     
     <?php include "public/footer.html" ?>
 
     <script>
-        const div = document.querySelectorAll(".disponivel");
-        const input = document.querySelector(".reserve");
+        const div = document.querySelectorAll(".disponível");
+        const input = document.querySelector("#reserve");
+        const button = document.querySelector("#button");
+
+        console.log(button);
+
+        button.disabled = true;
 
         for (let i = 0; i < div.length; i++) {         
               
@@ -83,6 +100,8 @@
                 div[i].classList.add("selected");
 
                 input.value = div[i].innerHTML;
+
+                button.disabled = false;
 
             }
 

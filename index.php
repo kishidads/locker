@@ -4,6 +4,7 @@ include 'controller/AlunoController.php';
 include 'controller/FuncionarioController.php';
 include 'controller/ArmarioController.php';
 include 'controller/CursoController.php';
+include 'controller/AluguelController.php';
 include 'controller/AuthenticationController.php';
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -90,9 +91,16 @@ switch($url) {
         ArmarioController::alterar();
     break;
 
-
     case '/excluir-armario':
         ArmarioController::excluir();
+    break;
+    
+    case '/checkout':
+        AluguelController::checkout();
+    break;
+
+    case '/reserva':
+        AluguelController::reserva();
     break;
 
     default:

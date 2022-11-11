@@ -50,6 +50,7 @@ class Authentication {
 	    session_destroy();
 
 	    header('Location: /');
+        die();
     }
 
 }

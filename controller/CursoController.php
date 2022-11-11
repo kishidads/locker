@@ -52,6 +52,7 @@ class CursoController {
         }
         
         header('Location: /listar-curso');
+        die();
         
     }
 
@@ -125,6 +126,7 @@ class CursoController {
         }
         
         header('Location: /listar-curso');
+        die();
 
     }
 
@@ -152,6 +154,7 @@ class CursoController {
         }
 
         header('Location: /listar-curso');
+        die();
 
     }
 

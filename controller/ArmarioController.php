@@ -53,6 +53,7 @@ class ArmarioController {
         }
         
         header('Location: /listar-armario');
+        die();
         
     }
 
@@ -67,6 +68,12 @@ class ArmarioController {
 
         $armariodao = new ArmarioDAO();
 
+        $locais = $armariodao->readLocal();
+
+        $andares = $armariodao->readFloor();
+        
+        $situacoes = $armariodao->readSituation();
+        
         $armarios = $armariodao->readAll();
         
         //echo '<pre>' , var_dump($armarios) , '</pre>';
@@ -78,21 +85,23 @@ class ArmarioController {
     public static function listarSelecao() {
         
         require_once 'session.php';
-        
+
         include_once 'connection/Connection.php';
         include_once 'model/Armario.php';
         include_once 'dao/ArmarioDAO.php';
         include_once 'controller/Filter.php';
 
-        if (isset($_POST['listar'])) {
+        $armariodao = new ArmarioDAO();
+
+        $locais = $armariodao->readLocal();
+
+        if (isset($_GET['listar'])) {
     
-            $local = $_POST['local'];
+            $local = $_GET['local'];
         
-            $armariodao = new ArmarioDAO();
-            
             $armarios = $armariodao->readSelection($local);
         
-            //echo '<pre>' , var_dump($armarios) , '</pre>';
+            //echo '<pre>' , var_dump($_GET) , '</pre>';
 
         }
         
@@ -153,6 +162,7 @@ class ArmarioController {
         }
         
         header('Location: /listar-armario');
+        die();
 
     }
 
@@ -180,6 +190,7 @@ class ArmarioController {
         }
 
         header('Location: /listar-armario');
+        die();
 
     }
 

@@ -33,6 +33,7 @@ class AuthenticationController {
             
             if ($login->login($data)) {         
                 header('Location: /meu-cadastro');
+                die();
             }
         
         }

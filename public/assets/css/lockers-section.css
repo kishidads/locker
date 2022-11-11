@@ -64,17 +64,17 @@
     background-size: cover;
 }
 
-.disponivel {
+.disponível {
     cursor: pointer;
     transition: all .3s ease;
 }
 
-.disponivel:hover {
+.disponível:hover {
     transform: scale(1.04);
     background-color: #319190;
 }
 
-.indisponivel {
+.indisponível {
     background-image: url("../img/indisponivel.svg"), url("../img/locker.svg");
     background-repeat: no-repeat, no-repeat;
     background-size: 40%, cover;
@@ -112,6 +112,9 @@
     cursor: pointer;
 }
 
-.reserve-form > button:hover {
+.reserve-form > button[disabled] {
     background-color: #fdd954;
+    cursor: not-allowed;
 }
+
+
