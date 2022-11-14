@@ -18,7 +18,19 @@
         <div class="login-wrapper">
             <h2>Revise sua solicitação e escolha um plano de aluguel.</h2>
 
-            <p>Armário selecionado: <?php echo "{$armario->getSecao()}{$armario->getNumero()}"?></p>
+            <fieldset class="revisao">
+                <legend>Revisão</legend>
+
+                <div class="revisao">        
+                    <div class="armario"><?php echo "{$armario->getSecao()}{$armario->getNumero()}"?></div>
+
+                    <div class="resumo">
+                        <p>Armário selecionado: <?php echo "{$armario->getSecao()}{$armario->getNumero()}"?></p>
+                        <p>Localização: <?php echo $armario->getLocal()?></p>
+                        <p>Piso <?php echo $armario->getAndar()?></p>
+                    </div>
+                </div>
+            </fieldset>
 
             <form action="/reserva" method="POST">
                 <fieldset>

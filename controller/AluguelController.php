@@ -80,7 +80,7 @@ class AluguelController {
 
             $armariodao = new ArmarioDAO();
 
-            $armariodao->read($armario->getId(), null, null);
+            $armario = $armariodao->read($armario->getId(), null, null);
 
             echo '<pre>' , var_dump($aluno) , '</pre>';
             echo '<pre>' , var_dump($armario) , '</pre>';
@@ -89,19 +89,27 @@ class AluguelController {
 
             $plano->setId($data['plano']);
 
-            $aluguel = new Aluguel();
+            if ($armario->getSituacao() === 'disponível') {
 
-            $aluguel->setData(date('Y-m-d H:i:s'));
-            $aluguel->setSituacao(0);
-            $aluguel->setIdAluno($aluno->getId());
-            $aluguel->setIdArmario($armario->getId());
-            $aluguel->setIdPlano($plano->getId());
+                $aluguel = new Aluguel();
+    
+                $aluguel->setData(date('Y-m-d H:i:s'));
+                $aluguel->setSituacao(0);
+                $aluguel->setIdAluno($aluno->getId());
+                $aluguel->setIdArmario($armario->getId());
+                $aluguel->setIdPlano($plano->getId());
+    
+                $alugueldao = new AluguelDAO();
+    
+                $alugueldao->create($aluguel);
 
-            $alugueldao = new AluguelDAO();
+                $armario->setSituacao('reservado');
 
-            $alugueldao->create($aluguel);
-            
-            echo '<pre>' , var_dump($aluguel) , '</pre>';
+                $armariodao->update($armario);
+                
+                echo '<pre>' , var_dump($aluguel) , '</pre>';
+                
+            }
 
         }
 
