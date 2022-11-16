@@ -101,7 +101,7 @@ CREATE TABLE aluguel (
 
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     data DATETIME NOT NULL,
-    situacao TINYINT(1),
+    situacao VARCHAR(15),
     id_aluno INT NOT NULL,
     id_armario INT NOT NULL,
     id_plano INT NOT NULL,

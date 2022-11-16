@@ -53,18 +53,24 @@ class FuncionarioDAO {
 
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $funcionario = new Funcionario();
+            if ($data) {
 
-            $funcionario->setCpf($data['cpf']);
-            $funcionario->setEmail($data['email']);
-            $funcionario->setSenha($data['senha']);
-            $funcionario->setNome($data['nome']);
-            $funcionario->setSobrenome($data['sobrenome']);
-            $funcionario->setFuncao($data['funcao']);
-            $funcionario->setPrivilegio($data['privilegio']);
-            $funcionario->setTelefone($data['telefone']);
-            
-            return $funcionario;
+                $funcionario = new Funcionario();
+
+                $funcionario->setCpf($data['cpf']);
+                $funcionario->setEmail($data['email']);
+                $funcionario->setSenha($data['senha']);
+                $funcionario->setNome($data['nome']);
+                $funcionario->setSobrenome($data['sobrenome']);
+                $funcionario->setFuncao($data['funcao']);
+                $funcionario->setPrivilegio($data['privilegio']);
+                $funcionario->setTelefone($data['telefone']);
+                
+                return $funcionario;
+
+            }
+    
+            return $data;
 
         } catch (Exception $e) {
 

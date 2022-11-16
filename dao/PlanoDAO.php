@@ -43,14 +43,20 @@ class PlanoDAO {
 
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $plano = new Plano();
+            if ($data) {
 
-            $plano->setId($data['id']);
-            $plano->setPlano($data['plano']);
-            $plano->setValor($data['valor']);
-            $plano->setStatus($data['status']);
-            
-            return $plano;
+                $plano = new Plano();
+
+                $plano->setId($data['id']);
+                $plano->setPlano($data['plano']);
+                $plano->setValor($data['valor']);
+                $plano->setStatus($data['status']);
+                
+                return $plano;
+
+            }
+    
+            return $data;
 
         } catch (Exception $e) {
 

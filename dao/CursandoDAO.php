@@ -45,14 +45,20 @@ class CursandoDAO {
 
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $cursando = new Cursando();
+            if ($data) {
 
-            $cursando->setId($data['id']);
-            $cursando->setCodigoCursando($data['codigo_cursando']);
-            $cursando->setNome($data['nome']);
-            $cursando->setDuracao($data['duracao']);
+                $cursando = new Cursando();
+
+                $cursando->setId($data['id']);
+                $cursando->setCodigoCursando($data['codigo_cursando']);
+                $cursando->setNome($data['nome']);
+                $cursando->setDuracao($data['duracao']);
+                
+                return $cursando;
             
-            return $cursando;
+            }
+    
+            return $data;
 
         } catch (Exception $e) {
 

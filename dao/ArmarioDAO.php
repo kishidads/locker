@@ -51,16 +51,22 @@ class ArmarioDAO {
 
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $armario = new Armario();
+            if ($data) {
 
-            $armario->setId($data['id']);
-            $armario->setSecao($data['secao']);
-            $armario->setNumero($data['numero']);
-            $armario->setLocal($data['local']);
-            $armario->setAndar($data['andar']);
-            $armario->setSituacao($data['situacao']);
-            
-            return $armario;
+                $armario = new Armario();
+
+                $armario->setId($data['id']);
+                $armario->setSecao($data['secao']);
+                $armario->setNumero($data['numero']);
+                $armario->setLocal($data['local']);
+                $armario->setAndar($data['andar']);
+                $armario->setSituacao($data['situacao']);
+                
+                return $armario;
+
+            }
+        
+            return $data;
 
         } catch (Exception $e) {
 

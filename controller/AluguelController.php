@@ -64,11 +64,11 @@ class AluguelController {
             include_once 'dao/AluguelDAO.php';
             include_once 'controller/Filter.php';
 
-            echo '<pre>' , var_dump($_SESSION) , '</pre>';
+            //echo '<pre>' , var_dump($_SESSION) , '</pre>';
             
             $data = $_POST;
             
-            echo '<pre>' , var_dump($data) , '</pre>';
+            //echo '<pre>' , var_dump($data) , '</pre>';
             
             $aluno = new Aluno();
 
@@ -82,34 +82,49 @@ class AluguelController {
 
             $armario = $armariodao->read($armario->getId(), null, null);
 
-            echo '<pre>' , var_dump($aluno) , '</pre>';
-            echo '<pre>' , var_dump($armario) , '</pre>';
+            //echo '<pre>' , var_dump($aluno) , '</pre>';
+            //echo '<pre>' , var_dump($armario) , '</pre>';
 
             $plano = new Plano();
 
             $plano->setId($data['plano']);
 
-            if ($armario->getSituacao() === 'disponível') {
+            $alugueldao = new AluguelDAO();
 
-                $aluguel = new Aluguel();
-    
-                $aluguel->setData(date('Y-m-d H:i:s'));
-                $aluguel->setSituacao(0);
-                $aluguel->setIdAluno($aluno->getId());
-                $aluguel->setIdArmario($armario->getId());
-                $aluguel->setIdPlano($plano->getId());
-    
-                $alugueldao = new AluguelDAO();
-    
-                $alugueldao->create($aluguel);
+            $alugueis = $alugueldao->readAllFromAluno($aluno->getId());
+            
+            echo '<pre>' , var_dump($alugueis) , '</pre>';
 
-                $armario->setSituacao('reservado');
-
-                $armariodao->update($armario);
-                
-                echo '<pre>' , var_dump($aluguel) , '</pre>';
-                
+            if (!($armario->getSituacao() === 'disponível')) {
+                echo 'Infelizmente o armário não encontra-se mais disponível.';
+                return;
             }
+
+            if ($alugueis) {
+                foreach ($alugueis as $aluguel) {
+                    if ($aluguel->getSituacao() === 'ativo' || $aluguel->getSituacao() === 'reservado') {
+                        echo 'Você já possui aluguel reservado ou ativo';
+
+                        return;
+                    }
+                }
+            }
+
+            $aluguel = new Aluguel();
+
+            $aluguel->setData(date('Y-m-d H:i:s'));
+            $aluguel->setSituacao('reservado');
+            $aluguel->setIdAluno($aluno->getId());
+            $aluguel->setIdArmario($armario->getId());
+            $aluguel->setIdPlano($plano->getId());
+
+            $alugueldao->create($aluguel);
+
+            $armario->setSituacao('reservado');
+
+            $armariodao->update($armario);
+            
+            echo '<pre>' , var_dump($aluguel) , '</pre>';
 
         }
 

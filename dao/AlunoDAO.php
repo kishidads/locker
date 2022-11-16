@@ -52,18 +52,24 @@ class AlunoDAO {
 
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $aluno = new Aluno();
+            if ($data) {
 
-            $aluno->setId($data['id']);
-            $aluno->setCpf($data['cpf']);
-            $aluno->setEmail($data['email']);
-            $aluno->setSenha($data['senha']);
-            $aluno->setNome($data['nome']);
-            $aluno->setSobrenome($data['sobrenome']);
-            $aluno->setTelefone($data['telefone']);
-            $aluno->setRm($data['rm']);
-            
-            return $aluno;
+                $aluno = new Aluno();
+
+                $aluno->setId($data['id']);
+                $aluno->setCpf($data['cpf']);
+                $aluno->setEmail($data['email']);
+                $aluno->setSenha($data['senha']);
+                $aluno->setNome($data['nome']);
+                $aluno->setSobrenome($data['sobrenome']);
+                $aluno->setTelefone($data['telefone']);
+                $aluno->setRm($data['rm']);
+                
+                return $aluno;
+                
+            }
+    
+        return $data;
 
         } catch (Exception $e) {
 

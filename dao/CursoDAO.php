@@ -40,18 +40,24 @@ class CursoDAO {
 
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $curso = new Curso();
+            if ($data) {
 
-            $curso->setCpf($data['cpf']);
-            $curso->setEmail($data['email']);
-            $curso->setSenha($data['senha']);
-            $curso->setNome($data['nome']);
-            $curso->setSobrenome($data['sobrenome']);
-            $curso->setTelefone($data['telefone']);
-            $curso->setRm($data['rm']);
-            $curso->setId($data['id']);
-            
-            return $curso;
+                $curso = new Curso();
+
+                $curso->setCpf($data['cpf']);
+                $curso->setEmail($data['email']);
+                $curso->setSenha($data['senha']);
+                $curso->setNome($data['nome']);
+                $curso->setSobrenome($data['sobrenome']);
+                $curso->setTelefone($data['telefone']);
+                $curso->setRm($data['rm']);
+                $curso->setId($data['id']);
+                
+                return $curso;
+                    
+            }
+    
+            return $data;
 
         } catch (Exception $e) {
 

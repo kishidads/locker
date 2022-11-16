@@ -45,16 +45,22 @@ class AluguelDAO {
 
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $aluguel = new Aluguel();
+            if ($data) {
 
-            $aluguel->setId($data['id']);
-            $aluguel->setSituacao($data['data']);
-            $aluguel->setIdAluno($data['situacao']);
-            $aluguel->setIdArmario($data['id_aluno']);
-            $aluguel->setIdAluno($data['id_armario']);
-            $aluguel->setIdPlano($data['id_plano']);
-            
-            return $aluguel;
+                $aluguel = new Aluguel();
+    
+                $aluguel->setId($data['id']);
+                $aluguel->setData($data['data']);
+                $aluguel->setSituacao($data['situacao']);
+                $aluguel->setIdAluno($data['id_aluno']);
+                $aluguel->setIdArmario($data['id_armario']);
+                $aluguel->setIdPlano($data['id_plano']);
+    
+                return $aluguel;
+    
+            }
+    
+            return $data;
 
         } catch (Exception $e) {
 
@@ -63,6 +69,52 @@ class AluguelDAO {
         }
 
     }
+/* 
+    public function readByForeignKey($idAluno, $idArmario, $idPlano) {
+
+        try {
+
+            $sql = 'SELECT *
+            FROM aluguel
+            WHERE (id_aluno = :id_aluno
+            OR id_armario = :id_armario
+            OR id_plano = :id_plano)
+            AND (situacao = "inativo")';
+
+            $stmt = Connection::getConnection()->prepare($sql);
+
+            $stmt->bindValue(':id_aluno', $idAluno);
+            $stmt->bindValue(':id_armario', $idArmario);
+            $stmt->bindValue(':id_plano', $idPlano);
+            
+            $stmt->execute();
+
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($data) {
+
+            $aluguel = new Aluguel();
+
+            $aluguel->setId($data['id']);
+            $aluguel->setData($data['data']);
+            $aluguel->setSituacao($data['situacao']);
+            $aluguel->setIdAluno($data['id_aluno']);
+            $aluguel->setIdArmario($data['id_armario']);
+            $aluguel->setIdPlano($data['id_plano']);
+
+            return $aluguel;
+
+            }
+
+            return $data;
+
+        } catch (Exception $e) {
+
+            echo 'Erro ao selecionar aluguel.<br>' . $e . '<br>';
+
+        }
+
+    } */
 
     public function readAll() {
 
@@ -84,12 +136,44 @@ class AluguelDAO {
 
             }
 
+            return $list;
+
+        } catch (Exception $e) {
+
+            echo 'Erro ao selecionar alugueis.<br>' . $e . '<br>';
+
+        }
+
+    }
+
+    public function readAllFromAluno($idAluno) {
+
+        try {
+            $sql = 'SELECT *
+            FROM aluguel
+            WHERE id_aluno = :id_aluno';
+
+            $stmt = Connection::getConnection()->prepare($sql);
+
+            $stmt->bindValue(':id_aluno', $idAluno);
+
+            $stmt->execute();
+
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $list = array();
+
+            foreach ($data as $row) {
+
+                $list[] = $this->list($row);
+
+            }
 
             return $list;
 
         } catch (Exception $e) {
 
-            echo 'Erro ao selecionar aluguel.<br>' . $e . '<br>';
+            echo 'Erro ao selecionar aluguel de aluno.<br>' . $e . '<br>';
 
         }
 
@@ -100,10 +184,10 @@ class AluguelDAO {
         $aluguel = new Aluguel();
 
         $aluguel->setId($row['id']);
-        $aluguel->setSituacao($row['data']);
-        $aluguel->setIdAluno($row['situacao']);
-        $aluguel->setIdArmario($row['id_aluno']);
-        $aluguel->setIdAluno($row['id_armario']);
+        $aluguel->setData($row['data']);
+        $aluguel->setSituacao($row['situacao']);
+        $aluguel->setIdAluno($row['id_aluno']);
+        $aluguel->setIdArmario($row['id_armario']);
         $aluguel->setIdPlano($row['id_plano']);
 
         return $aluguel;
