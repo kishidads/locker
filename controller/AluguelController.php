@@ -49,7 +49,6 @@ class AluguelController {
 
         require_once 'session.php';
 
-        
         if (isset($_POST['confirmar'])) {
             
             include_once 'connection/Connection.php';
@@ -129,6 +128,7 @@ class AluguelController {
         }
 
         include 'view/aluguel/reserva.php';
+
     }
 
 }

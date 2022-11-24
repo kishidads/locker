@@ -6,6 +6,7 @@ include 'controller/ArmarioController.php';
 include 'controller/CursoController.php';
 include 'controller/AluguelController.php';
 include 'controller/AuthenticationController.php';
+include 'controller/AdmAuthenticationController.php';
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -31,55 +32,67 @@ switch($url) {
         AlunoController::selecionar();
     break;
     
-    case '/listar-aluno':
+    case '/adm/dashboard/listar-aluno':
         AlunoController::listar();
     break;
 
-    case '/alterar-aluno':
+    case '/adm/dashboard/alterar-aluno':
         AlunoController::alterar();
     break;
 
-    case '/excluir-aluno':
+    case '/adm/dashboard/excluir-aluno':
         AlunoController::excluir();
     break;
 
-    case '/cadastro-funcionario':
+    case '/adm/login':
+        AdmAuthenticationController::entrar();
+    break;
+
+    case '/adm/sair':
+        AdmAuthenticationController::sair();
+    break;
+
+    case '/adm/dashboard/overview':
+        FuncionarioController::dashboard();
+    break;
+
+    case '/adm/dashboard/cadastro-funcionario':
         FuncionarioController::cadastrar();
     break;
 
-    case '/listar-funcionario':
+    case '/adm/dashboard/listar-funcionario':
         FuncionarioController::listar();
     break;
 
-    case '/alterar-funcionario':
+    case '/adm/dashboard/alterar-funcionario':
         FuncionarioController::alterar();
     break;
 
-    case '/excluir-funcionario':
+    case '/adm/dashboard/excluir-funcionario':
         FuncionarioController::excluir();
     break;
 
-    case '/cadastro-curso':
+    case '/adm/dashboard/cadastro-curso':
         CursoController::cadastrar();
     break;
 
-    case '/listar-curso':
+    case '/adm/dashboard/listar-curso':
         CursoController::listar();
     break;
 
-    case '/alterar-curso':
+    case '/adm/dashboard/alterar-curso':
         CursoController::alterar();
     break;
 
-    case '/excluir-curso':
+    case '/adm/dashboard/excluir-curso':
         CursoController::excluir();
     break;
 
-    case '/cadastro-armario':
+    case '/adm/dashboard/cadastro-armario':
         ArmarioController::cadastrar();
     break;
 
-    case '/listar-armario':
+    case '/adm/dashboard/listar-armario':
         ArmarioController::listar();
     break;
 
@@ -87,11 +100,11 @@ switch($url) {
         ArmarioController::listarSelecao();
     break;
     
-    case '/alterar-armario':
+    case '/adm/dashboard/alterar-armario':
         ArmarioController::alterar();
     break;
 
-    case '/excluir-armario':
+    case '/adm/dashboard/excluir-armario':
         ArmarioController::excluir();
     break;
     

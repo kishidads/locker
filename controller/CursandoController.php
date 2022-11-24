@@ -16,6 +16,7 @@ class CursandoController {
             include_once 'controller/Filter.php';
 
             $alunodao = new AlunoDAO();
+
             $aluno = $alunodao->read($_SESSION['id']);
     
 /*             $filter = new Filter();
@@ -63,7 +64,7 @@ class CursandoController {
             $cursandodao = new CursandoDAO();
             $cursandodao->create($cursando);
         
-            //header('Location: /listar-cursandos'); die();
+            //header('Location: /dashboard/listar-cursandos'); die();
         }
 
         include 'view/cursando/cadastro-cursando.php';
@@ -90,7 +91,7 @@ class CursandoController {
 
         }
         
-        include 'view/cursandos/listar-cursandos.php';
+        include 'view/dashboard/listar-cursandos.php';
         
     } */
 

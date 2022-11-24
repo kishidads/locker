@@ -1,5 +1,5 @@
 <?php
-class Authentication {
+class AdmAuthentication {
 
     private $email;
     private $senha;
@@ -24,6 +24,7 @@ class Authentication {
     }
 
     private function checkCredentials($user) {
+
         if ($user) {
             if ($user['senha'] === $this->senha) {
                 return $user;
@@ -33,24 +34,35 @@ class Authentication {
     }
 
     public function login($data) {
+
         $user = $this->checkCredentials($data);
+
         if ($user) {
+
             session_start();
-            $_SESSION['authenticate'] = true;
+
+            $_SESSION['admAuthenticate'] = true;
             $_SESSION['id'] = $user['id'];
             $_SESSION['nome'] = $user['nome'];
+            $_SESSION['privilegio'] = $user['privilegio'];
+
             return true;
+
         }
+
         return false;
+
     }
 
     public function logout() {
+
         session_start();
 	    session_unset();
 	    session_destroy();
 
-	    header('Location: /');
+	    header('Location: /adm/login');
         die();
+
     }
 
 }

@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     
-    <link rel="stylesheet" href="public/assets/css/style.css">
+    <link rel="stylesheet" href="../public/assets/css/style.css">
 </head>
 <body>
-    <?php include "public/header.php" ?>
+    <?php include "public/adm-header.php" ?>
 
     <section class="login">
         <div class="login-header">
             <h1>Entrar</h1>
         </div>
         <div class="login-wrapper">
-            <h2>Faça login na sua conta da Locketec</h2>
-            <form action="/login" method="POST">
+            <h2>Acesso de funcionários</h2>
+            <form action="/adm/login" method="POST">
                 <fieldset>
                     <legend>Login</legend>
 

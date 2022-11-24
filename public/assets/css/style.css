@@ -37,7 +37,7 @@ header {
 }
 
 header img {
-    max-height: 100%;
+    height: 100%;
 }
 
 header nav {
@@ -83,7 +83,7 @@ header nav button:hover {
 }
 
 main {
-    height: 94vh;
+    min-height: 94vh;
 }
 
 input::-webkit-outer-spin-button,
@@ -307,6 +307,7 @@ section .register-button:hover {
 
 .table-wrapper {
     width: 100%;
+    height: 80vh;
     margin-bottom: 2rem;
     background-color: #fafafa;
     border-radius: 12px;

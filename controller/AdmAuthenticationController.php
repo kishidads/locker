@@ -1,14 +1,14 @@
 <?php
 
-class AuthenticationController {
+class AdmAuthenticationController {
 
     public static function entrar() {
 
         if (isset($_POST['entrar'])) {
 
             include_once 'connection/Connection.php';
-            include_once 'model/Authentication.php';
-            include_once 'dao/AuthenticationDAO.php';
+            include_once 'model/AdmAuthentication.php';
+            include_once 'dao/AdmAuthenticationDAO.php';
             include_once 'controller/Filter.php';
         
             $filter = new Filter();
@@ -22,23 +22,23 @@ class AuthenticationController {
         
             //echo 'Validação:<br><pre>' , var_dump($data) , '</pre>';
             
-            $login = new Authentication();
+            $login = new AdmAuthentication();
 
             $login->setEmail($_POST['email']);
             $login->setSenha($_POST['senha']);
         
-            $authenticationdao = new AuthenticationDAO();
+            $admauthenticationdao = new AdmAuthenticationDAO();
 
-            $data = $authenticationdao->authenticate($login->getEmail());
+            $data = $admauthenticationdao->authenticate($login->getEmail());
             
             if ($login->login($data)) {         
-                header('Location: /meu-cadastro');
+                header('Location: /adm/dashboard/overview');
                 die();
             }
         
         }
 
-        include 'view/aluno/login.php';
+        include 'view/funcionario/adm-login.php';
 
     }
 
@@ -46,9 +46,9 @@ class AuthenticationController {
 
         if (isset($_POST['sair'])) {
         
-            include_once 'model/Authentication.php';
+            include_once 'model/AdmAuthentication.php';
             
-            $logout = new Authentication();
+            $logout = new AdmAuthentication();
 
             $logout->logout();
         

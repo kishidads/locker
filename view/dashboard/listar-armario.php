@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Armários</title>
 
-    <link rel="stylesheet" href="public/assets/css/style.css">
+    <link rel="stylesheet" href="../../public/assets/css/style.css">
 </head>
 <body>
-    <?php include "public/header.php" ?>
+    <?php include "public/adm-header.php" ?>
 
     <section class="armarios">
         <div class="section-header">
@@ -18,7 +18,7 @@
             <dialog>
                 <div class='dialog-div'>
                     <h2>Cadastrar</h2>
-                    <form action='/cadastro-armario' method='POST'>
+                    <form action='/adm/dashboard/cadastro-armario' method='POST'>
                         <fieldset>
                             <legend>Adicionar</legend>
 
@@ -127,7 +127,7 @@
                                             <button class='alterar modal-button'>Alterar</button>
                                         </td>
                                         <td>
-                                            <form action='/excluir-armario' method='POST'>
+                                            <form action='/adm/dashboard/excluir-armario' method='POST'>
                                                 <input type='hidden' name='id' value='{$armario->getId()}'>
                                                 <button class='excluir' type='submit' name='excluir'>X</button>
                                             </form>
@@ -135,7 +135,7 @@
                                         <dialog>
                                         <div class='dialog-div'>
                                             <h2>Editar</h2>
-                                            <form action='/alterar-armario' method='POST'>
+                                            <form action='/adm/dashboard/alterar-armario' method='POST'>
                                                 <fieldset>
                                                     <legend>Editar</legend>
 

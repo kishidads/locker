@@ -1,13 +1,13 @@
 <?php
 
-class AuthenticationDAO {
+class AdmAuthenticationDAO {
 
     public function authenticate($email) {
 
         try {
 
-            $sql = 'SELECT id, email, senha, nome
-            FROM aluno
+            $sql = 'SELECT id, email, senha, nome, privilegio
+            FROM funcionario
             WHERE email = :email';
 
             $stmt = Connection::getConnection()->prepare($sql);
@@ -22,7 +22,7 @@ class AuthenticationDAO {
 
         } catch (Exception $e) {
 
-            echo 'Erro ao selecionar aluno.<br>' . $e . '<br>';
+            echo 'Erro ao selecionar funcinário.<br>' . $e . '<br>';
 
         }
 

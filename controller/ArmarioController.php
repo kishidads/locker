@@ -4,7 +4,7 @@ class ArmarioController {
 
     public static function cadastrar() {
         
-        require_once 'session.php';
+        require_once 'adm-session.php';
 
         if (isset($_POST['cadastrar'])) {
 
@@ -52,14 +52,14 @@ class ArmarioController {
         
         }
         
-        header('Location: /listar-armario');
+        header('Location: /adm/dashboard/listar-armario');
         die();
         
     }
 
     public static function listar() {
         
-        require_once 'session.php';
+        require_once 'adm-session.php';
         
         include_once 'connection/Connection.php';
         include_once 'model/Armario.php';
@@ -78,7 +78,7 @@ class ArmarioController {
         
         //echo '<pre>' , var_dump($armarios) , '</pre>';
        
-        include 'view/armarios/listar-armario.php';
+        include 'view/dashboard/listar-armario.php';
         
     }
 
@@ -111,7 +111,7 @@ class ArmarioController {
 
     public static function alterar() {
 
-        require_once 'session.php';
+        require_once 'adm-session.php';
 
         if (isset($_POST['alterar'])) {
 
@@ -161,14 +161,14 @@ class ArmarioController {
             
         }
         
-        header('Location: /listar-armario');
+        header('Location: /adm/dashboard/listar-armario');
         die();
 
     }
 
     public static function excluir() {
         
-        require_once 'session.php';
+        require_once 'adm-session.php';
 
         if (isset($_POST['excluir'])) {
 
@@ -189,7 +189,7 @@ class ArmarioController {
 
         }
 
-        header('Location: /listar-armario');
+        header('Location: /adm/dashboard/listar-armario');
         die();
 
     }

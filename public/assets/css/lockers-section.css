@@ -103,6 +103,7 @@
 .reserve-form > button {
     padding: .5rem 2rem;
     border-radius: 1.5rem;
+    margin: 1rem 0;
     background-color: #ffc803;
     color: #fff;
     font-family: var(--primary-font);

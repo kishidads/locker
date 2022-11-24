@@ -87,7 +87,7 @@ class AlunoController {
 
     public static function listar() {
         
-        require_once 'session.php';
+        require_once 'adm-session.php';
         
         include_once 'connection/Connection.php';
         include_once 'model/Pessoa.php';
@@ -101,13 +101,13 @@ class AlunoController {
         
         //echo '<pre>' , var_dump($alunos) , '</pre>';
 
-        include 'view/aluno/listar-aluno.php';
+        include 'view/dashboard/listar-aluno.php';
         
     }
 
     public static function alterar() {
 
-        require_once 'session.php';
+        require_once 'adm-session.php';
     
         if (isset($_POST['alterar'])) {
 
@@ -167,7 +167,7 @@ class AlunoController {
 
     public static function excluir() {
         
-        require_once 'session.php';
+        require_once 'adm-session.php';
 
         if (isset($_POST['excluir'])) {
 
@@ -193,7 +193,7 @@ class AlunoController {
 
         }
 
-        header('Location: /listar-aluno');
+        header('Location: /adm/dashboard/listar-aluno');
         die();
 
     }

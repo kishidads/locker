@@ -4,7 +4,7 @@ class CursoController {
 
     public static function cadastrar() {
         
-        require_once 'session.php';
+        require_once 'adm-session.php';
 
         if (isset($_POST['cadastrar'])) {
 
@@ -51,14 +51,14 @@ class CursoController {
         
         }
         
-        header('Location: /listar-curso');
+        header('Location: /adm/dashboard/listar-curso');
         die();
         
     }
 
     public static function listar() {
         
-        require_once 'session.php';
+        require_once 'adm-session.php';
         
         include_once 'connection/Connection.php';
         include_once 'model/Curso.php';
@@ -71,13 +71,13 @@ class CursoController {
         
         //echo '<pre>' , var_dump($cursos) , '</pre>';
 
-        include 'view/curso/listar-curso.php';
+        include 'view/dashboard/listar-curso.php';
         
     }
 
     public static function alterar() {
 
-        require_once 'session.php';
+        require_once 'adm-session.php';
 
         if (isset($_POST['alterar'])) {
 
@@ -125,14 +125,14 @@ class CursoController {
             
         }
         
-        header('Location: /listar-curso');
+        header('Location: /adm/dashboard/listar-curso');
         die();
 
     }
 
     public static function excluir() {
         
-        require_once 'session.php';
+        require_once 'adm-session.php';
 
         if (isset($_POST['excluir'])) {
 
@@ -153,7 +153,7 @@ class CursoController {
 
         }
 
-        header('Location: /listar-curso');
+        header('Location: /adm/dashboard/listar-curso');
         die();
 
     }

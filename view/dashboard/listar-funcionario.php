@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Funcionários</title>
 
-    <link rel="stylesheet" href="public/assets/css/style.css">
+    <link rel="stylesheet" href="../../public/assets/css/style.css">
 </head>
 <body>
-    <?php include "public/header.php" ?>
+    <?php include "public/adm-header.php" ?>
 
     <section class="funcionarios">
         <div class="section-header">
@@ -18,7 +18,7 @@
             <dialog>
                 <div class='dialog-div'>
                     <h2>Cadastrar</h2>
-                    <form action='/cadastro-funcionario' method='POST'>
+                    <form action='/adm/dashboard/cadastro-funcionario' method='POST'>
                         <fieldset>
                             <legend>Adicionar</legend>
 
@@ -91,7 +91,7 @@
                                             <button class='alterar modal-button'>Alterar</button>
                                         </td>
                                         <td>
-                                            <form action='/excluir-funcionario' method='POST'>
+                                            <form action='/adm/dashboard/excluir-funcionario' method='POST'>
                                                 <input type='hidden' name='id' value='{$funcionario->getId()}'>
                                                 <button class='excluir' type='submit' name='excluir'>X</button>
                                             </form>
@@ -99,7 +99,7 @@
                                         <dialog>
                                         <div class='dialog-div'>
                                             <h2>Editar</h2>
-                                            <form action='/alterar-funcionario' method='POST'>
+                                            <form action='/adm/dashboard/alterar-funcionario' method='POST'>
                                                 <fieldset>
                                                     <legend>Editar</legend>
 

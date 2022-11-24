@@ -4,28 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alunos</title>
+    <title>Cursos</title>
 
-    <link rel="stylesheet" href="public/assets/css/style.css">
+    <link rel="stylesheet" href="../../public/assets/css/style.css">
 </head>
 <body>
-    <?php include "public/header.php" ?>
+    <?php include "public/adm-header.php" ?>
 
-    <section class="alunos">
+    <section class="cursos">
         <div class="section-header">
-            <h1>Alunos</h1>
-            <button class="register-button">Adicionar</button>
+            <h1>Cursos</h1>
+            <button class="register-button modal-button">Adicionar</button>
+            <dialog>
+                <div class='dialog-div'>
+                    <h2>Cadastrar</h2>
+                    <form action='/adm/dashboard/cadastro-curso' method='POST'>
+                        <fieldset>
+                            <legend>Adicionar</legend>
+
+                            <label for="codigo_curso">Código do curso</label>
+                            <input type="text" name="codigo_curso" id="codigo_curso" required>
+
+                            <label for="nome">Nome do curso</label>
+                            <input type="text" name="nome" id="nome" required>
+                            
+                            <label for="duracao">Duração (em semestres)</label>
+                            <input type="number" name="duracao" id="duracao" min="1" max="8" required>
+
+                            <div>
+                                <button class='confirmar' type='submit' name='cadastrar'>Confirmar</button>
+                                <button class='close'>Cancelar</button>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </dialog>
         </div>
         <div class="table-wrapper">
             <table>
                 <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Sobrenome</th>
-                    <th>RM</th>
-                    <th>CPF</th>
-                    <th>E-mail</th>
-                    <th>Telefone</th>
+                    <th>Código do curso</th>
+                    <th>Nome do curso</th>
+                    <th>Duração em semestres</th>
                     <th>Editar</th>
                     <th>Excluir</th>
                 </tr>
@@ -33,54 +55,42 @@
                 <tbody>
                     <?php 
 
-                        if (isset($alunos)) {
+                        if (isset($cursos)) {
                 
-                            foreach ($alunos as $aluno) {
+                            foreach ($cursos as $curso) {
 
                                 echo
                                     "<tr>
-                                        <td>{$aluno->getNome()}</td>
-                                        <td>{$aluno->getSobrenome()}</td>
-                                        <td>{$aluno->getRm()}</td>
-                                        <td>{$aluno->getCPF()}</td>
-                                        <td>{$aluno->getEmail()}</td>
-                                        <td>{$aluno->getTelefone()}</td>
+                                        <td>{$curso->getCodigoCurso()}</td>
+                                        <td>{$curso->getNome()}</td>
+                                        <td>{$curso->getDuracao()}</td>
                                         <td>
                                             <button class='alterar modal-button'>Alterar</button>
                                         </td>
                                         <td>
-                                            <form action='/excluir-aluno' method='POST'>
-                                                <input type='hidden' name='id' value='{$aluno->getId()}'>
+                                            <form action='/adm/dashboard/excluir-curso' method='POST'>
+                                                <input type='hidden' name='id' value='{$curso->getId()}'>
                                                 <button class='excluir' type='submit' name='excluir'>X</button>
                                             </form>
                                         </td>
                                         <dialog>
                                         <div class='dialog-div'>
                                             <h2>Editar</h2>
-                                            <form action='/alterar-aluno' method='POST'>
+                                            <form action='/adm/dashboard/alterar-curso' method='POST'>
                                                 <fieldset>
                                                     <legend>Editar</legend>
 
-                                                    <input type='hidden' name='id' value='{$aluno->getId()}'>
+                                                    <input type='hidden' name='id' value='{$curso->getId()}'>
 
-                                                    <label for='nome'>Nome</label>
-                                                    <input type='text' name='nome' id='nome' value='{$aluno->getNome()}'>
+                                                    <label for='codigo_curso'>Código deo curso</label>
+                                                    <input type='text' name='codigo_curso' id='codigo_curso' value='{$curso->getCodigoCurso()}'>
 
-                                                    <label for='sobrenome'>Sobrenome</label>
-                                                    <input type='text' name='sobrenome' id='sobrenome' value='{$aluno->getSobrenome()}'>
+                                                    <label for='nome'>Nome do curso</label>
+                                                    <input type='text' name='nome' id='nome' value='{$curso->getNome()}'>
 
-                                                    <label for='cpf'>CPF</label>
-                                                    <input type='text' name='cpf' id='cpf' value='{$aluno->getCpf()}'>
+                                                    <label for='duracao'>Duração em semestres</label>
+                                                    <input type='number' name='duracao' id='duracao' min='1' max='8' value='{$curso->getDuracao()}'>
 
-                                                    <label for='rm'>CPF</label>
-                                                    <input type='text' name='rm' id='rm' value='{$aluno->getRm()}'>
-                                                    
-                                                    <label for='email'>E-mail</label>
-                                                    <input type='text' name='email' id='email' value='{$aluno->getEmail()}'>
-                                                    
-                                                    <label for='telefone'>Telefone</label>
-                                                    <input type='text' name='telefone' id='telefone' value='{$aluno->getTelefone()}'>
-                                                    
                                                     <div>
                                                         <button class='confirmar' type='submit' name='alterar'>Confirmar</button>
                                                         <button class='close'>Cancelar</button>

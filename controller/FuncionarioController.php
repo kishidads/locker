@@ -4,7 +4,7 @@ class FuncionarioController {
 
     public static function cadastrar() {
 
-        require_once 'session.php';
+        require_once 'adm-session.php';
 
         if (isset($_POST['cadastrar'])) {
 
@@ -65,14 +65,14 @@ class FuncionarioController {
         
         }
         
-        header('Location: /listar-funcionario');
+        header('Location: /adm/dashboard/listar-funcionario');
         die();
 
     }
 
     public static function listar() {
         
-        require_once 'session.php';
+        require_once 'adm-session.php';
         
         include_once 'connection/Connection.php';
         include_once 'model/Pessoa.php';
@@ -86,13 +86,13 @@ class FuncionarioController {
         
         //echo '<pre>' , var_dump($funcionarios) , '</pre>';
 
-        include 'view/funcionario/listar-funcionario.php';
+        include 'view/dashboard/listar-funcionario.php';
         
     }
 
     public static function alterar() {
 
-        require_once 'session.php';
+        require_once 'adm-session.php';
 
         if (isset($_POST['alterar'])) {
 
@@ -148,14 +148,14 @@ class FuncionarioController {
             
         }
 
-        header('Location: /listar-funcionario');
+        header('Location: /adm/dashboard/listar-funcionario');
         die();
         
     }
 
     public static function excluir() {
         
-        require_once 'session.php';
+        require_once 'adm-session.php';
 
         if (isset($_POST['excluir'])) {
 
@@ -181,8 +181,22 @@ class FuncionarioController {
 
         }
 
-        header('Location: /listar-funcionario');
+        header('Location: /adm/dashboard/listar-funcionario');
         die();
+
+    }
+
+    public static function dashboard() {
+
+        require_once 'adm-session.php';
+
+        include_once 'connection/Connection.php';
+        include_once 'model/Pessoa.php';
+        include_once 'model/Funcionario.php';
+        include_once 'dao/FuncionarioDAO.php';
+        include_once 'controller/Filter.php';
+
+        include_once 'view/dashboard/overview.php';
 
     }
 
