@@ -114,7 +114,7 @@
 }
 
 .reserve-form > button[disabled] {
-    background-color: #fdd954;
+    background-color: #ffefb5;
     cursor: not-allowed;
 }
 

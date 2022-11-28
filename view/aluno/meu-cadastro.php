@@ -16,7 +16,7 @@
             <h1>Meu cadastro</h1>
         </div>
         <div class="login-wrapper">
-            <form action="/alterar-aluno" method="POST">
+            <form action="/alterar" method="POST">
                 <fieldset>
                     <legend>Meu cadastro</legend>
 

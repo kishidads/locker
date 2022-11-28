@@ -85,8 +85,6 @@
         const input = document.querySelector("#reserve");
         const button = document.querySelector("#button");
 
-        console.log(button);
-
         button.disabled = true;
 
         for (let i = 0; i < div.length; i++) {         

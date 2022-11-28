@@ -12,9 +12,46 @@
     <?php include "public/adm-header.php" ?>
 
     <section class="alunos">
-        <div class="section-header">
+    <div class="section-header">
             <h1>Alunos</h1>
-            <button class="register-button">Adicionar</button>
+            <button class="register-button modal-button">Adicionar</button>
+            <dialog>
+                <div class='dialog-div'>
+                    <h2>Cadastrar</h2>
+                    <form action='/adm/dashboard/cadastro-aluno' method='POST'>
+                        <fieldset>
+                            <legend>Adicionar</legend>
+
+                            <label for="nome">Nome</label>
+                            <input type="text" name="nome" id="nome" required>
+
+                            <label for="sobrenome">Sobrenome</label>
+                            <input type="text" name="sobrenome" id="sobrenome" required>
+
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" name="telefone" id="telefone" required>
+
+                            <label for="rm">RM</label>
+                            <input type="number" name="rm" id="rm" required>
+
+                            <label for="email">E-mail</label>
+                            <input type="email" name="email" id="email" required>
+
+                            <label for="cpf">CPF</label>
+                            <input type="text" name="cpf" id="cpf" required>
+
+                            <label for="senha">Senha</label>
+                            <input type="password" name="senha" id="senha" required>
+
+                            <div>
+                                <button class='confirmar' type='submit' name='cadastrar'>Confirmar</button>
+                                <button class='close'>Cancelar</button>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </dialog>
         </div>
         <div class="table-wrapper">
             <table>
@@ -63,23 +100,26 @@
 
                                                     <input type='hidden' name='id' value='{$aluno->getId()}'>
 
-                                                    <label for='nome'>Nome</label>
-                                                    <input type='text' name='nome' id='nome' value='{$aluno->getNome()}'>
+                                                    <label for='{$aluno->getId()}_nome'>Nome</label>
+                                                    <input type='text' name='nome' id='{$aluno->getId()}_nome' value='{$aluno->getNome()}'>
 
-                                                    <label for='sobrenome'>Sobrenome</label>
-                                                    <input type='text' name='sobrenome' id='sobrenome' value='{$aluno->getSobrenome()}'>
+                                                    <label for='{$aluno->getId()}_sobrenome'>Sobrenome</label>
+                                                    <input type='text' name='sobrenome' id='{$aluno->getId()}_sobrenome' value='{$aluno->getSobrenome()}'>
 
-                                                    <label for='cpf'>CPF</label>
-                                                    <input type='text' name='cpf' id='cpf' value='{$aluno->getCpf()}'>
+                                                    <label for='{$aluno->getId()}_cpf'>CPF</label>
+                                                    <input type='text' name='cpf' id='{$aluno->getId()}_cpf' value='{$aluno->getCpf()}'>
 
-                                                    <label for='rm'>CPF</label>
-                                                    <input type='text' name='rm' id='rm' value='{$aluno->getRm()}'>
+                                                    <label for='{$aluno->getId()}_rm'>RM</label>
+                                                    <input type='text' name='rm' id='{$aluno->getId()}_rm' value='{$aluno->getRm()}'>
                                                     
-                                                    <label for='email'>E-mail</label>
-                                                    <input type='text' name='email' id='email' value='{$aluno->getEmail()}'>
+                                                    <label for='{$aluno->getId()}_email'>E-mail</label>
+                                                    <input type='text' name='email' id='{$aluno->getId()}_email' value='{$aluno->getEmail()}'>
+
+                                                    <label for='{$aluno->getId()}_senha'>Senha</label>
+                                                    <input type='password' name='senha' id='{$aluno->getId()}_senha' value='{$aluno->getSenha()}'>
                                                     
-                                                    <label for='telefone'>Telefone</label>
-                                                    <input type='text' name='telefone' id='telefone' value='{$aluno->getTelefone()}'>
+                                                    <label for='{$aluno->getId()}_telefone'>Telefone</label>
+                                                    <input type='text' name='telefone' id='{$aluno->getId()}_telefone' value='{$aluno->getTelefone()}'>
                                                     
                                                     <div>
                                                         <button class='confirmar' type='submit' name='alterar'>Confirmar</button>

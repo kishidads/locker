@@ -82,7 +82,7 @@ class AlunoDAO {
     public function readAll() {
 
         try {
-            $sql = 'SELECT aluno.id, rm, cpf, email, nome, sobrenome, telefone
+            $sql = 'SELECT aluno.id, rm, cpf, email, senha, nome, sobrenome, telefone
             FROM aluno INNER JOIN telefone_aluno telefone
             ON aluno.id = telefone.id_aluno
             ORDER BY nome ASC';
@@ -119,6 +119,7 @@ class AlunoDAO {
         $aluno->setRm($row['rm']);
         $aluno->setCpf($row['cpf']);
         $aluno->setEmail($row['email']);
+        $aluno->setSenha($row['senha']);
         $aluno->setNome($row['nome']);
         $aluno->setSobrenome($row['sobrenome']);
         $aluno->setTelefone($row['telefone']);
@@ -128,6 +129,38 @@ class AlunoDAO {
     }
      
     public function update(Aluno $aluno) {
+
+        try {
+
+            $sql = 'START TRANSACTION;
+            UPDATE aluno SET rm = :rm, cpf = :cpf, email = :email, senha = :senha, nome = :nome, sobrenome = :sobrenome
+            WHERE id = :id;
+            UPDATE telefone_aluno SET telefone = :telefone
+            WHERE id_aluno = :id;
+            COMMIT;';
+
+            $stmt = Connection::getConnection()->prepare($sql);
+
+            $stmt->bindValue(':rm', $aluno->getRm(), PDO::PARAM_INT);
+            $stmt->bindValue(':cpf', $aluno->getCpf(), PDO::PARAM_STR);
+            $stmt->bindValue(':email', $aluno->getEmail(), PDO::PARAM_STR);
+            $stmt->bindValue(':senha', $aluno->getSenha(), PDO::PARAM_STR);
+            $stmt->bindValue(':nome', $aluno->getNome(), PDO::PARAM_STR);
+            $stmt->bindValue(':sobrenome', $aluno->getSobrenome(), PDO::PARAM_STR);
+            $stmt->bindValue(':telefone', $aluno->getTelefone(), PDO::PARAM_STR);
+            $stmt->bindValue(':id', $aluno->getId(), PDO::PARAM_INT);
+
+            return $stmt->execute();
+
+        } catch (Exception $e) {
+
+            echo 'Erro ao tentar fazer atualizar aluno.<br>' . $e . '<br>';
+
+        }
+
+    }
+
+    public function studentUpdate(Aluno $aluno) {
 
         try {
 
@@ -144,7 +177,7 @@ class AlunoDAO {
             $stmt->bindValue(':nome', $aluno->getNome(), PDO::PARAM_STR);
             $stmt->bindValue(':sobrenome', $aluno->getSobrenome(), PDO::PARAM_STR);
             $stmt->bindValue(':telefone', $aluno->getTelefone(), PDO::PARAM_STR);
-            $stmt->bindValue(':id', $_SESSION['id'], PDO::PARAM_INT);
+            $stmt->bindValue(':id', $aluno->getId(), PDO::PARAM_INT);
 
             return $stmt->execute();
 

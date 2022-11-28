@@ -82,14 +82,14 @@
 
                                                     <input type='hidden' name='id' value='{$curso->getId()}'>
 
-                                                    <label for='codigo_curso'>Código deo curso</label>
-                                                    <input type='text' name='codigo_curso' id='codigo_curso' value='{$curso->getCodigoCurso()}'>
+                                                    <label for='{$curso->getId()}_codigo_curso'>Código deo curso</label>
+                                                    <input type='text' name='codigo_curso' id='{$curso->getId()}_codigo_curso' value='{$curso->getCodigoCurso()}'>
 
-                                                    <label for='nome'>Nome do curso</label>
-                                                    <input type='text' name='nome' id='nome' value='{$curso->getNome()}'>
+                                                    <label for='{$curso->getId()}_nome'>Nome do curso</label>
+                                                    <input type='text' name='nome' id='{$curso->getId()}_nome' value='{$curso->getNome()}'>
 
-                                                    <label for='duracao'>Duração em semestres</label>
-                                                    <input type='number' name='duracao' id='duracao' min='1' max='8' value='{$curso->getDuracao()}'>
+                                                    <label for='{$curso->getId()}_duracao'>Duração em semestres</label>
+                                                    <input type='number' name='duracao' id='{$curso->getId()}_duracao' min='1' max='8' value='{$curso->getDuracao()}'>
 
                                                     <div>
                                                         <button class='confirmar' type='submit' name='alterar'>Confirmar</button>

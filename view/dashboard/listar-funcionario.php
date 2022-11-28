@@ -105,26 +105,26 @@
 
                                                     <input type='hidden' name='id' value='{$funcionario->getId()}'>
 
-                                                    <label for='nome'>Nome</label>
-                                                    <input type='text' name='nome' id='nome' value='{$funcionario->getNome()}'>
+                                                    <label for='{$funcionario->getId()}_nome'>Nome</label>
+                                                    <input type='text' name='nome' id='{$funcionario->getId()}_nome' value='{$funcionario->getNome()}'>
 
-                                                    <label for='sobrenome'>Sobrenome</label>
-                                                    <input type='text' name='sobrenome' id='sobrenome' value='{$funcionario->getSobrenome()}'>
+                                                    <label for='{$funcionario->getId()}_sobrenome'>Sobrenome</label>
+                                                    <input type='text' name='sobrenome' id='{$funcionario->getId()}_sobrenome' value='{$funcionario->getSobrenome()}'>
 
-                                                    <label for='cpf'>CPF</label>
-                                                    <input type='text' name='cpf' id='cpf' value='{$funcionario->getCpf()}'>
+                                                    <label for='{$funcionario->getId()}_cpf'>CPF</label>
+                                                    <input type='text' name='cpf' id='{$funcionario->getId()}_cpf' value='{$funcionario->getCpf()}'>
                                                     
-                                                    <label for='email'>E-mail</label>
-                                                    <input type='text' name='email' id='email' value='{$funcionario->getEmail()}'>
+                                                    <label for='{$funcionario->getId()}_email'>E-mail</label>
+                                                    <input type='text' name='email' id='{$funcionario->getId()}_email' value='{$funcionario->getEmail()}'>
                                                     
-                                                    <label for='telefone'>Telefone</label>
-                                                    <input type='text' name='telefone' id='telefone' value='{$funcionario->getTelefone()}'>
+                                                    <label for='{$funcionario->getId()}_telefone'>Telefone</label>
+                                                    <input type='text' name='telefone' id='{$funcionario->getId()}_telefone' value='{$funcionario->getTelefone()}'>
                                                     
-                                                    <label for='funcao'>Função</label>
-                                                    <input type='text' name='funcao' id='funcao' value='{$funcionario->getFuncao()}'>
+                                                    <label for='{$funcionario->getId()}_funcao'>Função</label>
+                                                    <input type='text' name='funcao' id='{$funcionario->getId()}_funcao' value='{$funcionario->getFuncao()}'>
 
-                                                    <label for='privilegio'>Privilégio</label>
-                                                    <input type='text' name='privilegio' id='privilegio' value='{$funcionario->getPrivilegio()}'>
+                                                    <label for='{$funcionario->getId()}_privilegio'>Privilégio</label>
+                                                    <input type='text' name='privilegio' id='{$funcionario->getId()}_privilegio' value='{$funcionario->getPrivilegio()}'>
 
                                                     <div>
                                                         <button class='confirmar' type='submit' name='alterar'>Confirmar</button>

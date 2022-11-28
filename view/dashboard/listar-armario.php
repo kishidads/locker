@@ -141,20 +141,20 @@
 
                                                     <input type='hidden' name='id' value='{$armario->getId()}'>
 
-                                                    <label for='secao'>Seção</label>
-                                                    <input type='text' name='secao' id='secao' value='{$armario->getSecao()}'>
+                                                    <label for='{$armario->getId()}_secao'>Seção</label>
+                                                    <input type='text' name='secao' id='{$armario->getId()}_secao' value='{$armario->getSecao()}'>
 
-                                                    <label for='numero'>Número</label>
-                                                    <input type='numero' name='numero' id='numero' value='{$armario->getNumero()}'>
+                                                    <label for='{$armario->getId()}_numero'>Número</label>
+                                                    <input type='numero' name='numero' id='{$armario->getId()}_numero' value='{$armario->getNumero()}'>
 
-                                                    <label for='local'>Localização</label>
-                                                    <input type='text' name='local' id='local' value='{$armario->getLocal()}'>
+                                                    <label for='{$armario->getId()}_local'>Localização</label>
+                                                    <input type='text' name='local' id='{$armario->getId()}_local' value='{$armario->getLocal()}'>
 
-                                                    <label for='situacao'>Situação</label>
-                                                    <input type='text' name='situacao' id='situacao' value='{$armario->getSituacao()}'>
+                                                    <label for='{$armario->getId()}_situacao'>Situação</label>
+                                                    <input type='text' name='situacao' id='{$armario->getId()}_situacao' value='{$armario->getSituacao()}'>
 
-                                                    <label for='andar'>Piso</label>
-                                                    <input type='text' name='andar' id='andar' value='{$armario->getAndar()}'>
+                                                    <label for='{$armario->getId()}_andar'>Piso</label>
+                                                    <input type='text' name='andar' id='{$armario->getId()}_andar' value='{$armario->getAndar()}'>
 
                                                     <div>
                                                         <button class='confirmar' type='submit' name='alterar'>Confirmar</button>
