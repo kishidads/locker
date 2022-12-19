@@ -44,7 +44,7 @@ CREATE TABLE funcionario (
 CREATE TABLE aluno (
 
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    rm INT NULL UNIQUE,
+    rm INT NOT NULL UNIQUE,
     cpf CHAR(11) NOT NULL UNIQUE,
     email VARCHAR(60) NOT NULL UNIQUE,
     senha VARCHAR(45) NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE aluguel (
 
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     data DATETIME NOT NULL,
-    situacao VARCHAR(15),
+    situacao NOT NULL VARCHAR(15),
     id_aluno INT NOT NULL,
     id_armario INT NOT NULL,
     id_plano INT NOT NULL,

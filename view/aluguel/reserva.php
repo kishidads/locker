@@ -10,7 +10,23 @@
 </head>
 <body>
     <?php include "public/header.php" ?>
+    <section class="login">
+        <div class="login-header">
+            <h1>Pedido</h1>
+        </div>
+        <div class="login-wrapper">
+            <?php
+            
+            foreach ($msgs as $msg) {
+                echo "<h2>{$msg}</h2>";
+            }
 
+            ?>
+
+                    
+<!--             <button type="submit" name="confirmar">Voltar</button>
+ -->        </div>
+    </section>
 
     <?php include "public/footer.html" ?>
 </body>
